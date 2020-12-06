@@ -10,7 +10,7 @@ import java.util.List;
 public class Day1Part2 {
     
     public static void main(String[] args) throws Exception {
-        List<Integer> ints = Helper.readInputs("1", Integer::valueOf);
+        List<Integer> ints = Helper.loadInput("1", Integer::valueOf);
         loop: for (int i : ints) {
             for (int j : ints) {
                 for (int k : ints) {

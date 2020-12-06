@@ -4,30 +4,28 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Karl Oczadly
  */
 public class Helper {
     
-    public static <T> List<T> readInputs(String dayName, Function<String, T> parseFunc) throws Exception {
+    public static Stream<String> streamInput(String dayName) throws Exception {
         InputStream fis = Helper.class.getClassLoader().getResourceAsStream("day" + dayName + ".txt");
-        if (fis == null) throw new FileNotFoundException("Resource input not found.");
-        BufferedReader input = new BufferedReader(new InputStreamReader(fis));
-        
-        List<T> vals = new ArrayList<>();
-        String line;
-        while ((line = input.readLine()) != null) {
-            vals.add(parseFunc.apply(line));
-        }
-        return vals;
+        if (fis == null) throw new FileNotFoundException("Input resource not found.");
+        return new BufferedReader(new InputStreamReader(fis)).lines();
     }
     
-    public static List<String> readInputs(String dayName) throws Exception {
-        return readInputs(dayName, s -> s);
+    public static <T> List<T> loadInput(String dayName, Function<String, T> parseFunc) throws Exception {
+        return streamInput(dayName).map(parseFunc).collect(Collectors.toList());
+    }
+    
+    public static List<String> loadInput(String dayName) throws Exception {
+        return loadInput(dayName, s -> s);
     }
     
 }

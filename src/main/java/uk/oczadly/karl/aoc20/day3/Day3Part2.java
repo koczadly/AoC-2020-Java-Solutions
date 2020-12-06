@@ -17,7 +17,7 @@ public class Day3Part2 {
                 new TraversalStrategy(7, 1),
                 new TraversalStrategy(1, 2));
         
-        Map map = Map.load(Helper.readInputs("3"));
+        Map map = Map.load(Helper.loadInput("3"));
         
         long solution = 1;
         for (TraversalStrategy strategy : strategies) {
