@@ -3,6 +3,7 @@ package uk.oczadly.karl.aoc20.day4;
 import uk.oczadly.karl.aoc20.Helper;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,8 +16,10 @@ public class Day4Part1 {
         boolean inProgress = false;
         EnumSet<FieldType> presentFields = EnumSet.noneOf(FieldType.class);
         
-        for (String ln : Helper.loadInput("4")) {
-            if (ln.equals("")) { // Empty line
+        List<String> data = Helper.loadInput("4");
+        data.add(""); // Add empty line to process final group
+        for (String ln : data) {
+            if (ln.isEmpty()) { // Empty line
                 if (inProgress && isValid(presentFields)) valid++;
                 presentFields.clear();
             } else {
@@ -26,8 +29,6 @@ public class Day4Part1 {
                 }
             }
         }
-        if (inProgress && isValid(presentFields))
-            valid++; // Add any last unfinished value
     
         System.out.printf("Valid passports: %d%n", valid);
     }

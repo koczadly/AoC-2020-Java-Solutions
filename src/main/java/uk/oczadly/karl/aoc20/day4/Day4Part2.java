@@ -14,7 +14,9 @@ public class Day4Part2 {
     
     public static void main(String[] args) throws Exception {
         // Each map represents a single ID, with a value for each field
-        List<Map<FieldType, String>> ids = loadIds(Helper.loadInput("4"));
+        List<String> data = Helper.loadInput("4");
+        data.add(""); // Add empty line to process final group
+        List<Map<FieldType, String>> ids = loadIds(data);
 
         int valid = 0;
         for (Map<FieldType, String> id : ids) {
@@ -40,7 +42,7 @@ public class Day4Part2 {
         
         Map<FieldType, String> currentId = null;
         for (String ln : input) {
-            if (ln.equals("")) { // Empty line
+            if (ln.isEmpty()) { // Empty line
                 if (currentId != null)
                     loaded.add(currentId);
                 currentId = null;
@@ -55,8 +57,6 @@ public class Day4Part2 {
                 }
             }
         }
-        if (currentId != null)
-            loaded.add(currentId); // Add remaining ID
         return loaded;
     }
     
