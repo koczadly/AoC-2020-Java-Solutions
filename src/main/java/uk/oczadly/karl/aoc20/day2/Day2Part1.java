@@ -1,4 +1,6 @@
-package uk.oczadly.karl.aoc20;
+package uk.oczadly.karl.aoc20.day2;
+
+import uk.oczadly.karl.aoc20.Helper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
