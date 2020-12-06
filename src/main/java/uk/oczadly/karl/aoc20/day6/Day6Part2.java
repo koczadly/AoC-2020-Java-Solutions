@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Karl Oczadly
@@ -17,8 +18,9 @@ public class Day6Part2 {
         data.add(""); // Add empty line to process final group
     
         int result = 0;
-        boolean newGroup = true;
+        boolean newGroup = true; // Ensure first entry of group adds to the list instead of subtracting
         Set<Character> currentGroup = new HashSet<>();
+        
         for (String ln : data) {
             if (ln.isEmpty()) {
                 result += currentGroup.size();
@@ -30,10 +32,9 @@ public class Day6Part2 {
                     for (char c : ln.toCharArray())
                         currentGroup.add(c);
                 } else {
+                    if (currentGroup.isEmpty()) continue;
                     // Get set of current persons chars
-                    Set<Character> currentChars = new HashSet<>();
-                    for (char c : ln.toCharArray())
-                        currentChars.add(c);
+                    Set<Character> currentChars = ln.chars().mapToObj(i -> (char)i).collect(Collectors.toSet());
                     // Remove missing chars from set
                     currentGroup.removeIf(c -> !currentChars.contains(c));
                 }
