@@ -5,6 +5,9 @@ Here are my Java solutions for the 2020 Advent of Code challenge. I'll be attemp
 You can attempt these awesome puzzles for yourself at https://adventofcode.com/2020.
 
 ## Technicalities
+Be aware that the inputs can differ between user accounts, and may not emit the correct solution for you (unless you
+ swap the input files).
+
 These solutions will be written using Java 8, and will make heavy use of the Streams API.
 
 The [`Helper`](src/main/java/uk/oczadly/karl/aoc20/Helper.java) class is used to load the input data into the
