@@ -14,18 +14,34 @@ import java.util.stream.Stream;
  */
 public class Helper {
     
+    /**
+     * Streams a set of input data from the resources folder.
+     * @param day the day number
+     * @return a stream of each line in the file
+     */
     public static Stream<String> streamInput(int day) {
         InputStream fis = Helper.class.getClassLoader().getResourceAsStream("inputs/day" + day + ".txt");
         if (fis == null) throw new IllegalArgumentException("Input resource not found.");
         return new BufferedReader(new InputStreamReader(fis)).lines();
     }
     
+    /**
+     * Loads a set of input data from the resources folder into a {@link List}.
+     * @param day the day number
+     * @param parseFunc a function to convert the string into the desired type
+     * @return a list of each line in the file
+     */
     public static <T> List<T> loadInput(int day, Function<String, T> parseFunc) {
         return streamInput(day).map(parseFunc).collect(Collectors.toList());
     }
     
+    /**
+     * Loads a set of input data from the resources folder into a {@link List}.
+     * @param day the day number
+     * @return a list of each line in the file
+     */
     public static List<String> loadInput(int day) {
-        return loadInput(day, s -> s);
+        return streamInput(day).collect(Collectors.toList());
     }
     
 }
