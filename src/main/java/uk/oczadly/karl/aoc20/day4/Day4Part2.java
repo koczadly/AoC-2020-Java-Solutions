@@ -18,13 +18,15 @@ public class Day4Part2 {
         data.add(""); // Add empty line to process final group
         List<Map<FieldType, String>> ids = loadIds(data);
 
-        int valid = 0;
-        for (Map<FieldType, String> id : ids) {
-            if (isValid(id)) valid++;
-        }
-
+        long valid = ids.stream()
+                .filter(Day4Part2::isValid)
+                .count();
+        
         System.out.printf("Valid passports: %d%n", valid);
     }
+    
+    
+    static final Pattern FIELD_PATTERN = Pattern.compile("(\\w+):(\\S+)");
     
     public static boolean isValid(Map<FieldType, String> id) {
         for (FieldType field : FieldType.values()) {
@@ -49,12 +51,9 @@ public class Day4Part2 {
             } else {
                 if (currentId == null)
                     currentId = new HashMap<>();
-                
-                for (String s : ln.split(" ")) {
-                    String[] fieldData = s.split(":");
-                    FieldType fieldType = FieldType.ofCodename(fieldData[0]);
-                    currentId.put(fieldType, fieldData[1]);
-                }
+                Matcher m = FIELD_PATTERN.matcher(ln);
+                while (m.find())
+                    currentId.put(FieldType.ofCodename(m.group(1)), m.group(2));
             }
         }
         return loaded;

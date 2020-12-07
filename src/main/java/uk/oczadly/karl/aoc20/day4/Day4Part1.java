@@ -5,28 +5,31 @@ import uk.oczadly.karl.aoc20.Helper;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Karl Oczadly
  */
 public class Day4Part1 {
     
+    static final Pattern FIELD_PATTERN = Pattern.compile("(\\w+):(\\S+)");
+    
     public static void main(String[] args) throws Exception {
         int valid = 0;
-        boolean inProgress = false;
         EnumSet<FieldType> presentFields = EnumSet.noneOf(FieldType.class);
         
         List<String> data = Helper.loadInput(4);
         data.add(""); // Add empty line to process final group
         for (String ln : data) {
             if (ln.isEmpty()) { // Empty line
-                if (inProgress && isValid(presentFields)) valid++;
+                if (!presentFields.isEmpty() && isValid(presentFields))
+                    valid++;
                 presentFields.clear();
             } else {
-                inProgress = true;
-                for (String s : ln.split(" ")) {
-                    presentFields.add(FieldType.ofCodename(s.split(":")[0]));
-                }
+                Matcher m = FIELD_PATTERN.matcher(ln);
+                while (m.find())
+                    presentFields.add(FieldType.ofCodename(m.group(1)));
             }
         }
     
