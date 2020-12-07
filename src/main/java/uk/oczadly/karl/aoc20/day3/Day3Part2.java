@@ -20,21 +20,10 @@ public class Day3Part2 {
                 new TraversalStrategy(1, 2));
         
         long solution = strategies.stream()
-                .mapToLong(strat -> traverse(map, strat))
+                .mapToLong(map::traverse)
                 .reduce(1, (x, y) -> x * y);
         
         System.out.printf("Solution: %d%n", solution);
-    }
-    
-    static int traverse(Map map, TraversalStrategy strategy) {
-        int collisions = 0, x = 0, y = 0;
-        do {
-            if (map.isTree(x, y))
-                collisions++;
-            x += strategy.deltaX;
-            y += strategy.deltaY;
-        } while (y < map.height);
-        return collisions;
     }
     
     
@@ -51,6 +40,17 @@ public class Day3Part2 {
         public boolean isTree(int x, int y) {
             if (y >= height) throw new IllegalArgumentException("Y position out of range.");
             return pixels[y][x % width];
+        }
+    
+        public int traverse(TraversalStrategy strategy) {
+            int collisions = 0, x = 0, y = 0;
+            do {
+                if (isTree(x, y))
+                    collisions++;
+                x += strategy.deltaX;
+                y += strategy.deltaY;
+            } while (y < this.height);
+            return collisions;
         }
         
         public static Map load(List<String> input) {
