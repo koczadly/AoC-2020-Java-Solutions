@@ -28,7 +28,8 @@ public class Day2Part2 {
             this.index1 = index1;
             this.index2 = index2;
         }
-        
+    
+        /** Returns true if the given password meets the criteria set by this password policy. */
         public boolean matches(String s) {
             return (s.length() >= index1 && s.charAt(index1 - 1) == c)
                     ^ (s.length() >= index2 && s.charAt(index2 - 1) == c);
@@ -46,11 +47,13 @@ public class Day2Part2 {
             this.password = password;
             this.policy = policy;
         }
-        
+    
+        /** Returns true if the password meets the criteria set by the password policy. */
         public boolean isValid() {
             return policy.matches(password);
         }
-        
+    
+        /** Parses a password entry from the raw input data. */
         public static PasswordEntry parse(String s) {
             Matcher matcher = INPUT_MATCHER.matcher(s);
             if (!matcher.matches()) throw new IllegalArgumentException("Invalid input");

@@ -28,7 +28,8 @@ public class Day2Part1 {
             this.min = min;
             this.max = max;
         }
-        
+    
+        /** Returns true if the given password meets the criteria set by this password policy. */
         public boolean matches(String s) {
             int count = 0;
             for (char c : s.toCharArray())
@@ -49,10 +50,12 @@ public class Day2Part1 {
             this.policy = policy;
         }
         
+        /** Returns true if the password meets the criteria set by the password policy. */
         public boolean isValid() {
             return policy.matches(password);
         }
         
+        /** Parses a password entry from the raw input data. */
         public static PasswordEntry parse(String s) {
             Matcher matcher = INPUT_MATCHER.matcher(s);
             if (!matcher.matches()) throw new IllegalArgumentException("Invalid input");

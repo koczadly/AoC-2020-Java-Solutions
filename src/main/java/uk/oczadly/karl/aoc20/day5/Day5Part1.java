@@ -19,28 +19,30 @@ public class Day5Part1 {
     }
     
     
+    /** Parses a Seat object (row and column) from a string input */
     private static Seat parseSeat(String str) {
         return new Seat(calcBinaryNumber(str.substring(0, 7)), calcBinaryNumber(str.substring(7, 10)));
     }
     
+    /** Calculates the binary number from a sequence of steps. */
     private static int calcBinaryNumber(String str) {
-        int min = 0, max = (1 << str.length()) - 1;
+        int lower = 0, upper = (1 << str.length()) - 1;
         for (char c : str.toCharArray()) {
-            int range = max - min + 1;
+            int range = upper - lower + 1;
             switch (c) {
                 case 'F':
                 case 'L':
-                    max -= range / 2;
+                    upper -= range / 2;
                     break;
                 case 'B':
                 case 'R':
-                    min += range / 2;
+                    lower += range / 2;
                     break;
                 default: throw new IllegalArgumentException("Unknown movement.");
             }
         }
-        if (min != max) throw new AssertionError("Unknown result value.");
-        return min;
+        if (lower != upper) throw new AssertionError("Unknown result value.");
+        return lower;
     }
     
     static class Seat {

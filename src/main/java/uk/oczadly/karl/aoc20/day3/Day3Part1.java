@@ -10,7 +10,7 @@ import java.util.List;
 public class Day3Part1 {
     
     public static void main(String[] args) throws Exception {
-        Map map = Map.load(Helper.loadInput(3));
+        MapGrid map = MapGrid.load(Helper.loadInput(3));
         
         int collisions = 0, x = 0, y = 0;
         do {
@@ -23,22 +23,24 @@ public class Day3Part1 {
     }
     
     
-    static class Map {
+    static class MapGrid {
         boolean[][] pixels;
         int width, height;
     
-        Map(boolean[][] pixels, int width, int height) {
+        MapGrid(boolean[][] pixels, int width, int height) {
             this.pixels = pixels;
             this.width = width;
             this.height = height;
         }
         
+        /** Returns true if the (x,y) position is a tree. */
         public boolean isTree(int x, int y) {
             if (y >= height) throw new IllegalArgumentException("Y position out of range.");
             return pixels[y][x % width];
         }
-        
-        public static Map load(List<String> input) {
+    
+        /** Parses a MapGrid object from a list of input data. */
+        public static MapGrid load(List<String> input) {
             int height = input.size(), width = input.get(0).length();
             boolean[][] pixels = new boolean[height][width];
             
@@ -48,9 +50,10 @@ public class Day3Part1 {
                     pixels[row][col] = parseMapPixel(chars[col]);
                 }
             }
-            return new Map(pixels, width, height);
+            return new MapGrid(pixels, width, height);
         }
         
+        /** Returns true if a tree, and false if not an empty space. */
         private static boolean parseMapPixel(char c) {
             switch (c) {
                 case '.': return false;

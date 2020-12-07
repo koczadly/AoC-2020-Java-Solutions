@@ -28,6 +28,7 @@ public class Day4Part2 {
     
     static final Pattern FIELD_PATTERN = Pattern.compile("(\\w+):(\\S+)");
     
+    /** Returns true if the map contains all the required fields and they meet the validation requirements. */
     public static boolean isValid(Map<FieldType, String> id) {
         for (FieldType field : FieldType.values()) {
             if (field.validator != null) {
@@ -39,6 +40,7 @@ public class Day4Part2 {
         return true;
     }
     
+    /** Loads all of the IDs in from a given list of input data. */
     public static List<Map<FieldType, String>> loadIds(List<String> input) {
         List<Map<FieldType, String>> loaded = new ArrayList<>();
         
@@ -90,10 +92,12 @@ public class Day4Part2 {
             throw new IllegalArgumentException("Unknown property codename.");
         }
     
+        /** Helper function for validation lambdas. */
         private static Predicate<String> inRange(int min, int max) {
             return str -> inRange(str, min, max);
         }
-    
+        
+        /** Helper function for validation lambdas. */
         private static boolean inRange(String strVal, int min, int max) {
             int val = Integer.parseInt(strVal);
             return val >= min && val <= max;

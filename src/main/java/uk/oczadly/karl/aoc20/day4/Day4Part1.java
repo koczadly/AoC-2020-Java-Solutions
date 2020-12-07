@@ -36,6 +36,7 @@ public class Day4Part1 {
         System.out.printf("Valid passports: %d%n", valid);
     }
     
+    /** Returns true if the set contains all the required fields. */
     public static boolean isValid(Set<FieldType> fields) {
         for (FieldType p : FieldType.values()) {
             if (p.required && !fields.contains(p))
