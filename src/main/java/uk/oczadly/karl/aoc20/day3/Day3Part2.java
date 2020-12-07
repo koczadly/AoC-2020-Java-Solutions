@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class Day3Part2 {
     
     public static void main(String[] args) throws Exception {
-        Map map = Map.load(Helper.loadInput("3"));
+        Map map = Map.load(Helper.loadInput(3));
         
         Stream<TraversalStrategy> strategies = Stream.of(
                 new TraversalStrategy(1, 1),

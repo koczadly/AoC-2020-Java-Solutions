@@ -10,7 +10,7 @@ import java.util.List;
 public class Day3Part1 {
     
     public static void main(String[] args) throws Exception {
-        Map map = Map.load(Helper.loadInput("3"));
+        Map map = Map.load(Helper.loadInput(3));
         
         int collisions = 0, x = 0, y = 0;
         do {

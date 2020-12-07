@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class Day6Part2 {
     
     public static void main(String[] args) throws Exception {
-        List<String> data = Helper.loadInput("6");
+        List<String> data = Helper.loadInput(6);
         data.add(""); // Add empty line to process final group
     
         int result = 0;

@@ -14,7 +14,7 @@ public class Day4Part2 {
     
     public static void main(String[] args) throws Exception {
         // Each map represents a single ID, with a value for each field
-        List<String> data = Helper.loadInput("4");
+        List<String> data = Helper.loadInput(4);
         data.add(""); // Add empty line to process final group
         List<Map<FieldType, String>> ids = loadIds(data);
 

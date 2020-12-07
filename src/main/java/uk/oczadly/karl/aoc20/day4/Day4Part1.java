@@ -16,7 +16,7 @@ public class Day4Part1 {
         boolean inProgress = false;
         EnumSet<FieldType> presentFields = EnumSet.noneOf(FieldType.class);
         
-        List<String> data = Helper.loadInput("4");
+        List<String> data = Helper.loadInput(4);
         data.add(""); // Add empty line to process final group
         for (String ln : data) {
             if (ln.isEmpty()) { // Empty line

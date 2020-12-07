@@ -13,7 +13,7 @@ public class Day5Part2 {
     public static void main(String[] args) throws Exception {
         // Populate seats array (true = occupied)
         boolean[][] seats = new boolean[128][8];
-        Helper.streamInput("5")
+        Helper.streamInput(5)
                 .map(Day5Part2::parseSeat)
                 .forEach(seat -> seats[seat.row][seat.column] = true);
         

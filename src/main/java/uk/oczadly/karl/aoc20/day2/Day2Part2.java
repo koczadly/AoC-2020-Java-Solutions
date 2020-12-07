@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class Day2Part2 {
     
     public static void main(String[] args) throws Exception {
-        long count = Helper.streamInput("2")
+        long count = Helper.streamInput(2)
                 .map(PasswordEntry::parse)
                 .filter(PasswordEntry::isValid)
                 .count();

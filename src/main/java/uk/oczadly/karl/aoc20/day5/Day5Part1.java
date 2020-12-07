@@ -10,7 +10,7 @@ import java.util.OptionalInt;
 public class Day5Part1 {
     
     public static void main(String[] args) throws Exception {
-        OptionalInt maxSeatId = Helper.streamInput("5")
+        OptionalInt maxSeatId = Helper.streamInput(5)
                 .map(Day5Part1::parseSeat)
                 .mapToInt(Seat::getId)
                 .max();
