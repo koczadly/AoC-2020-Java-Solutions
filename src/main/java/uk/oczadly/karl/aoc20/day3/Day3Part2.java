@@ -3,6 +3,7 @@ package uk.oczadly.karl.aoc20.day3;
 import uk.oczadly.karl.aoc20.Helper;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author Karl Oczadly
@@ -12,14 +13,14 @@ public class Day3Part2 {
     public static void main(String[] args) throws Exception {
         Map map = Map.load(Helper.loadInput("3"));
         
-        List<TraversalStrategy> strategies = List.of(
+        Stream<TraversalStrategy> strategies = Stream.of(
                 new TraversalStrategy(1, 1),
                 new TraversalStrategy(3, 1),
                 new TraversalStrategy(5, 1),
                 new TraversalStrategy(7, 1),
                 new TraversalStrategy(1, 2));
         
-        long solution = strategies.stream()
+        long solution = strategies
                 .mapToLong(map::traverse)
                 .reduce(1, (x, y) -> x * y);
         
