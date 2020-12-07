@@ -14,17 +14,17 @@ import java.util.stream.Stream;
  */
 public class Helper {
     
-    public static Stream<String> streamInput(int day) throws Exception {
+    public static Stream<String> streamInput(int day) {
         InputStream fis = Helper.class.getClassLoader().getResourceAsStream("inputs/day" + day + ".txt");
-        if (fis == null) throw new FileNotFoundException("Input resource not found.");
+        if (fis == null) throw new IllegalArgumentException("Input resource not found.");
         return new BufferedReader(new InputStreamReader(fis)).lines();
     }
     
-    public static <T> List<T> loadInput(int day, Function<String, T> parseFunc) throws Exception {
+    public static <T> List<T> loadInput(int day, Function<String, T> parseFunc) {
         return streamInput(day).map(parseFunc).collect(Collectors.toList());
     }
     
-    public static List<String> loadInput(int day) throws Exception {
+    public static List<String> loadInput(int day) {
         return loadInput(day, s -> s);
     }
     
