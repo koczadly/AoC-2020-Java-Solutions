@@ -2,10 +2,7 @@ package uk.oczadly.karl.aoc20.day7;
 
 import uk.oczadly.karl.aoc20.Helper;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -13,6 +10,7 @@ import java.util.regex.Pattern;
  */
 public class Day7Part2 {
     
+    static final String TARGET_COLOUR = "shiny gold";
     static final Pattern RULE_PATTERN = Pattern.compile(
             "(?:(^\\w+ \\w+) bags contain )|(?:\\G(\\d+) (\\w+ \\w+) bags?(?:, |.))");
     
@@ -22,28 +20,26 @@ public class Day7Part2 {
         Map<String, Set<ContainingBagRule>> bagRules = loadBagRules();
     
         // Calculate bag counts
-        int count = calculateBagCount("shiny gold", bagRules, new HashMap<>());
+        int count = calculateBagCount(TARGET_COLOUR, bagRules, new HashMap<>());
         
-        System.out.printf("Bags held within 'shiny gold': %d%n", count);
+        System.out.printf("Bags held within '%s': %d%n", TARGET_COLOUR, count);
     }
     
     
     /**
      * Recursive method to calculate the number of contained bags.
      * The 'cache' map is used to store already computed values, meaning they don't need to be re-calculated.
+     * Note that the cache is likely useless for this puzzle, given the small input size; with a larger number of bag
+     * types, this would greatly help to reduce the calculation time.
      */
     private static int calculateBagCount(String colour, Map<String, Set<ContainingBagRule>> bagRules,
                                          Map<String, Integer> cache) {
-        if (cache.containsKey(colour))
-            return cache.get(colour); // Use cached value if available
-        
+        if (cache.containsKey(colour)) return cache.get(colour); // Use cached value if available
+        // Count the number of bags held inside this bag colour
         int count = 0;
-        if (bagRules.containsKey(colour)) {
-            for (ContainingBagRule rule : bagRules.get(colour)) {
-                count += (calculateBagCount(rule.colour, bagRules, cache) + 1) * rule.count;
-            }
-        }
-        cache.put(colour, count);
+        for (ContainingBagRule rule : bagRules.get(colour))
+            count += (calculateBagCount(rule.colour, bagRules, cache) + 1) * rule.count;
+        cache.put(colour, count); // Store in the cache for later use
         return count;
     }
     

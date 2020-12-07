@@ -10,46 +10,28 @@ import java.util.regex.Pattern;
  */
 public class Day7Part1 {
     
+    static final String TARGET_COLOUR = "shiny gold";
     static final Pattern RULE_PATTERN = Pattern.compile(
             "(?:(^\\w+ \\w+) bags contain )|(?:\\G(\\d+) (\\w+ \\w+) bags?(?:, |.))");
     
     
+    
     public static void main(String[] args) {
-        // Load bag rules in
+        // Load the direct bag rules in
         Map<String, Set<String>> bagRules = loadBagRules();
         
-        // Calculate all the bag colours they can recursively hold
-        Map<String, Set<String>> bagRulesRecursive = new HashMap<>();
-        int countContainingShinyGold = 0;
-        for (String colour : bagRules.keySet()) {
-            calculateFor(colour, bagRules, bagRulesRecursive);
-            if (bagRulesRecursive.get(colour).contains("shiny gold"))
-                countContainingShinyGold++;
-        }
+        int count = 0;
+        for (String colour : bagRules.keySet())
+            if (containsTargetColour(colour, bagRules)) count++;
     
-        System.out.printf("Colours which can contain 'shiny gold': %d%n", countContainingShinyGold);
+        System.out.printf("Colours which can contain '%s': %d%n", TARGET_COLOUR, count);
     }
     
-    /**
-     * Recursive method to calculate *all* the containing bags for the specified colour.
-     * When calculated, the containing colours set is placed into the bagRulesRecursive map.
-     */
-    private static void calculateFor(String name, Map<String, Set<String>> directBagRules,
-                                        Map<String, Set<String>> bagRulesRecursive) {
-        if (bagRulesRecursive.containsKey(name)) return;
-    
-        Set<String> directlyContained = directBagRules.get(name);
-        if (directlyContained != null) {
-            Set<String> contains = new HashSet<>(directlyContained);   // Copy direct containing colours
-            for (String contColour : directlyContained) {              // For each directly contained colour...
-                calculateFor(contColour, directBagRules, bagRulesRecursive); // Recursively calculate
-                contains.addAll(bagRulesRecursive.get(contColour));    // Add all calculated values
-            }
-            bagRulesRecursive.put(name, contains);
-        } else {
-            // Bag doesn't contain any other bags, store an empty set
-            bagRulesRecursive.put(name, Collections.emptySet());
-        }
+    /** Recursive method to check whether the given bag (or one of its children) contains 'shiny gold'. */
+    private static boolean containsTargetColour(String name, Map<String, Set<String>> bagRules) {
+        for (String subColour : bagRules.get(name))
+            if (subColour.equals(TARGET_COLOUR) || containsTargetColour(subColour, bagRules)) return true;
+        return false;
     }
     
     /** Loads all of the bag rules from the input data. */
