@@ -20,10 +20,10 @@ public class Day5Part1 {
     
     
     private static Seat parseSeat(String str) {
-        return new Seat(findNumber(str.substring(0, 7)), findNumber(str.substring(7, 10)));
+        return new Seat(calcBinaryNumber(str.substring(0, 7)), calcBinaryNumber(str.substring(7, 10)));
     }
     
-    private static int findNumber(String str) {
+    private static int calcBinaryNumber(String str) {
         int min = 0, max = (1 << str.length()) - 1;
         for (char c : str.toCharArray()) {
             int range = max - min + 1;
