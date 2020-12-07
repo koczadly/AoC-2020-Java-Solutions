@@ -10,6 +10,8 @@ import java.util.List;
 public class Day3Part2 {
     
     public static void main(String[] args) throws Exception {
+        Map map = Map.load(Helper.loadInput("3"));
+        
         List<TraversalStrategy> strategies = List.of(
                 new TraversalStrategy(1, 1),
                 new TraversalStrategy(3, 1),
@@ -17,22 +19,22 @@ public class Day3Part2 {
                 new TraversalStrategy(7, 1),
                 new TraversalStrategy(1, 2));
         
-        Map map = Map.load(Helper.loadInput("3"));
-        
-        long solution = 1;
-        for (TraversalStrategy strategy : strategies) {
-            int collisions = 0, x = 0, y = 0;
-            do {
-                if (map.isTree(x, y))
-                    collisions++;
-                x += strategy.deltaX;
-                y += strategy.deltaY;
-            } while (y < map.height);
-            solution *= collisions;
-            System.out.printf("Tree collisions: %d%n", collisions);
-        }
+        long solution = strategies.stream()
+                .mapToLong(strat -> traverse(map, strat))
+                .reduce(1, (x, y) -> x * y);
         
         System.out.printf("Solution: %d%n", solution);
+    }
+    
+    static int traverse(Map map, TraversalStrategy strategy) {
+        int collisions = 0, x = 0, y = 0;
+        do {
+            if (map.isTree(x, y))
+                collisions++;
+            x += strategy.deltaX;
+            y += strategy.deltaY;
+        } while (y < map.height);
+        return collisions;
     }
     
     
