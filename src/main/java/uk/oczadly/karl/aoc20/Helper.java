@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class Helper {
     
     public static Stream<String> streamInput(String dayName) throws Exception {
-        InputStream fis = Helper.class.getClassLoader().getResourceAsStream("day" + dayName + ".txt");
+        InputStream fis = Helper.class.getClassLoader().getResourceAsStream("inputs/day" + dayName + ".txt");
         if (fis == null) throw new FileNotFoundException("Input resource not found.");
         return new BufferedReader(new InputStreamReader(fis)).lines();
     }
