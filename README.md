@@ -15,7 +15,8 @@ The [`Helper`](src/main/java/uk/oczadly/karl/aoc20/Helper.java) class is used to
  
 
 ### Solutions
-**S** indicates a standard implementation using classes and methods. **M** indicates a bare minimum implementation,
+- **`S`** indicates a standard implementation using classes and methods.
+- **`M`** indicates a bare minimum implementation,
  typically only containing a main method.
 
 Day | Input data | Part 1 Code | Solution | Part 2 Code | Solution
