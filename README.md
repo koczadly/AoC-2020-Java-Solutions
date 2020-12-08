@@ -15,20 +15,19 @@ The [`Helper`](src/main/java/uk/oczadly/karl/aoc20/Helper.java) class is used to
  
 
 ### Solutions
-- **`S`** indicates a standard implementation using classes and methods.
-- **`M`** indicates a bare minimum implementation,
- typically only containing a main method.
+- **`N`** indicates a normal implementation using classes and functions.
+- **`S`** indicates a simple bare minimum implementation, typically only containing a main method.
 
 Day | Input data | Part 1 Code | Solution | Part 2 Code | Solution
 --- | --- | --- | --- | --- | ---
-1 | [txt](src/main/resources/inputs/day1.txt) | [S](src/main/java/uk/oczadly/karl/aoc20/day1/Day1Part1.java) | 73371 | [S](src/main/java/uk/oczadly/karl/aoc20/day1/Day1Part2.java) | 127642310
-2 | [txt](src/main/resources/inputs/day2.txt) | [S](src/main/java/uk/oczadly/karl/aoc20/day2/Day2Part1.java) | 645 | [S](src/main/java/uk/oczadly/karl/aoc20/day2/Day2Part2.java) | 737
-3 | [txt](src/main/resources/inputs/day3.txt) | [S](src/main/java/uk/oczadly/karl/aoc20/day3/Day3Part1.java) | 276 | [S](src/main/java/uk/oczadly/karl/aoc20/day3/Day3Part2.java) | 7812180000
-4 | [txt](src/main/resources/inputs/day4.txt) | [S](src/main/java/uk/oczadly/karl/aoc20/day4/Day4Part1.java) | 216 | [S](src/main/java/uk/oczadly/karl/aoc20/day4/Day4Part2.java) | 150
-5 | [txt](src/main/resources/inputs/day5.txt) | [S](src/main/java/uk/oczadly/karl/aoc20/day5/Day5Part1.java) | 892 | [S](src/main/java/uk/oczadly/karl/aoc20/day5/Day5Part2.java) | 625
-6 | [txt](src/main/resources/inputs/day6.txt) | [S](src/main/java/uk/oczadly/karl/aoc20/day6/Day6Part1.java) | 6506 | [S](src/main/java/uk/oczadly/karl/aoc20/day6/Day6Part2.java) | 3243
-7 | [txt](src/main/resources/inputs/day7.txt) | [S](src/main/java/uk/oczadly/karl/aoc20/day7/Day7Part1.java) | 213 | [S](src/main/java/uk/oczadly/karl/aoc20/day7/Day7Part2.java) | 38426
-8 | [txt](src/main/resources/inputs/day8.txt) | [S](src/main/java/uk/oczadly/karl/aoc20/day8/Day8Part1.java) [M](src/main/java/uk/oczadly/karl/aoc20/day8/Day8Part1.java) | 1671 | [S](src/main/java/uk/oczadly/karl/aoc20/day8/Day8Part2.java) | 892
+1 | [txt](src/main/resources/inputs/day1.txt) | [N](src/main/java/uk/oczadly/karl/aoc20/day1/Day1Part1.java) | 73371 | [N](src/main/java/uk/oczadly/karl/aoc20/day1/Day1Part2.java) | 127642310
+2 | [txt](src/main/resources/inputs/day2.txt) | [N](src/main/java/uk/oczadly/karl/aoc20/day2/Day2Part1.java) | 645 | [N](src/main/java/uk/oczadly/karl/aoc20/day2/Day2Part2.java) | 737
+3 | [txt](src/main/resources/inputs/day3.txt) | [N](src/main/java/uk/oczadly/karl/aoc20/day3/Day3Part1.java) | 276 | [N](src/main/java/uk/oczadly/karl/aoc20/day3/Day3Part2.java) | 7812180000
+4 | [txt](src/main/resources/inputs/day4.txt) | [N](src/main/java/uk/oczadly/karl/aoc20/day4/Day4Part1.java) | 216 | [N](src/main/java/uk/oczadly/karl/aoc20/day4/Day4Part2.java) | 150
+5 | [txt](src/main/resources/inputs/day5.txt) | [N](src/main/java/uk/oczadly/karl/aoc20/day5/Day5Part1.java) | 892 | [N](src/main/java/uk/oczadly/karl/aoc20/day5/Day5Part2.java) | 625
+6 | [txt](src/main/resources/inputs/day6.txt) | [N](src/main/java/uk/oczadly/karl/aoc20/day6/Day6Part1.java) | 6506 | [N](src/main/java/uk/oczadly/karl/aoc20/day6/Day6Part2.java) | 3243
+7 | [txt](src/main/resources/inputs/day7.txt) | [N](src/main/java/uk/oczadly/karl/aoc20/day7/Day7Part1.java) | 213 | [N](src/main/java/uk/oczadly/karl/aoc20/day7/Day7Part2.java) | 38426
+8 | [txt](src/main/resources/inputs/day8.txt) | [N](src/main/java/uk/oczadly/karl/aoc20/day8/Day8Part1.java) [S](src/main/java/uk/oczadly/karl/aoc20/day8/Day8Part1Simple.java) | 1671 | [N](src/main/java/uk/oczadly/karl/aoc20/day8/Day8Part2.java) | 892
 9 | 🚧 | 🚧 | 🚧 | 🚧 | 🚧
 10 | 🚧 | 🚧 | 🚧 | 🚧 | 🚧
 11 | 🚧 | 🚧 | 🚧 | 🚧 | 🚧
