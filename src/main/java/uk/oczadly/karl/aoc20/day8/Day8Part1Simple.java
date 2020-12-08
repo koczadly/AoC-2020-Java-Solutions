@@ -14,20 +14,18 @@ public class Day8Part1Simple {
         
         int inst = 0, acc = 0;
         boolean[] seen = new boolean[input.size()];
-        while (true) {
+        for (String s = input.get(inst); ; inst++) {
             if (seen[inst]) {
                 System.out.printf("Result = %d%n", acc);
                 return;
             }
             seen[inst] = true;
-            String s = input.get(inst);
             String op = s.split(" ")[0];
             int val = Integer.parseInt(s.split(" ")[1]);
             switch (op) {
                 case "acc": acc += val; break;
                 case "jmp": inst += val - 1; break;
             }
-            inst++;
         }
     }
     
