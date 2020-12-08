@@ -5,13 +5,11 @@ Here are my Java solutions for the 2020 Advent of Code challenge. I'll be attemp
 You can attempt these awesome puzzles for yourself at https://adventofcode.com/2020.
 
 ### Technicalities
-Be aware that the inputs can differ between user accounts, and may not emit the correct solution for you (unless you
- swap the input files).
-
 These solutions are written using Java 8, and make heavy use of the built-in Streams API.
 
 The [`Helper`](src/main/java/uk/oczadly/karl/aoc20/Helper.java) class is used to load the input data into the
- application, which are stored as plain text files under the [resources](src/main/resources/inputs) path.
+ application, which are stored as plain text files under the [inputs](src/main/resources/inputs) resources directory.
+ Input files should be named `dayX.txt`, where `X` is the day number (eg. `day2.txt`).
  
 
 ### Solutions
