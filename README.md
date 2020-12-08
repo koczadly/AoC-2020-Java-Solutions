@@ -1,7 +1,6 @@
 ## 🎄🎄 Advent of Code 2020 Solutions (Java) 🎄🎄
 Here are my Java solutions for the 2020 Advent of Code challenge. I'll be attempting to solve every puzzle — but
  don't expect perfect or reliable code.
- ![pix](https://karl.oczadly.uk/tools/pix.png?k=gh-aoc2020&i=n)
 
 You can attempt these awesome puzzles for yourself at https://adventofcode.com/2020.
 
