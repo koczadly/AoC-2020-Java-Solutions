@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author Karl Oczadly
@@ -16,7 +14,8 @@ import java.util.stream.Stream;
 public class Day8Part1 {
     
     public static void main(String[] args) {
-        VirtualMachine vm = VirtualMachine.loadImage(Helper.streamInput(8));
+        // Load virtual machine image
+        VirtualMachine vm = new VirtualMachine(Helper.loadInput(8, Instruction::parse));
         System.out.printf("Loaded %,d program instructions...%n", vm.instructions.size());
         
         boolean[] executed = new boolean[vm.instructions.size()]; // Tracks what instructions have been executed
@@ -59,13 +58,6 @@ public class Day8Part1 {
             if (instrIndex < 0) throw new IllegalStateException("Invalid instruction index.");
             if (instrIndex >= instructions.size()) return null; // End of program
             return instructions.get(instrIndex);
-        }
-        
-        /** Loads a VM image from a stream of raw string data. */
-        public static VirtualMachine loadImage(Stream<String> instructions) {
-            return new VirtualMachine(instructions
-                    .map(Instruction::parse)
-                    .collect(Collectors.toList()));
         }
     }
     

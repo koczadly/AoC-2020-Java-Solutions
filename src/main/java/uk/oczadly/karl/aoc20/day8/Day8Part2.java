@@ -16,18 +16,17 @@ import java.util.stream.Stream;
 public class Day8Part2 {
     
     public static void main(String[] args) {
-        VirtualMachine vm = VirtualMachine.loadImage(Helper.streamInput(8));
+        // Load virtual machine image
+        VirtualMachine vm = new VirtualMachine(Helper.loadInput(8, Instruction::parse));
         System.out.printf("Loaded %,d program instructions...%n", vm.instructions.size());
-    
-        // Array is used for doesExecute - it's declared here so it can be reused for performance optimizations
-        boolean[] executed = new boolean[vm.instructions.size()];
         
         // Try modifying each instruction, one by one
+        Solver solver = new Solver(vm);
         for (Instruction instr : vm.instructions) {
             Operation op = instr.op;
             if (op == Operation.JUMP || op == Operation.NO_OP) {
                 instr.op = op == Operation.JUMP ? Operation.NO_OP : Operation.JUMP; // Swap operation
-                if (doesExecute(vm, executed)) {
+                if (solver.doesExecute()) {
                     // Found a working solution
                     System.out.printf("Found working program! Final accumulator value = %d%n",
                             vm.accumulator);
@@ -38,19 +37,35 @@ public class Day8Part2 {
         }
     }
     
-    /** Returns true if the program loaded into the VM executes successfully. */
-    public static boolean doesExecute(VirtualMachine vm, boolean[] executed) {
-        Arrays.fill(executed, false); // Clear re-used array
-        vm.reset(); // Reset the VM's state
-        do {
-            if (vm.instrIndex >= vm.instructions.size()) break;
-            if (executed[vm.instrIndex])
-                return false; // Infinite loop found
-            executed[vm.instrIndex] = true;
-        } while (vm.execute());
-        // Return true if the program ended on the last instruction index + 1
-        return vm.instrIndex == vm.instructions.size();
+    
+    /**
+     * Helper class to test whether the VM executes it's loaded program.
+     * This class is used so the 'executed' array can be re-used between attempts, improving performance.
+     */
+    static class Solver {
+        final VirtualMachine vm;
+        final boolean[] executed;
+    
+        public Solver(VirtualMachine vm) {
+            this.vm = vm;
+            this.executed = new boolean[vm.instructions.size()];
+        }
+    
+        /** Returns true if the program loaded into the VM executes successfully. */
+        public boolean doesExecute() {
+            Arrays.fill(executed, false); // Clear re-used array
+            vm.reset(); // Reset the VM's state
+            do {
+                if (vm.instrIndex >= vm.instructions.size()) break;
+                if (executed[vm.instrIndex])
+                    return false; // Infinite loop found
+                executed[vm.instrIndex] = true;
+            } while (vm.execute());
+            // Return true if the program ended on the last instruction index + 1
+            return vm.instrIndex == vm.instructions.size();
+        }
     }
+   
     
     
     static class VirtualMachine {
