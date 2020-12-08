@@ -3,7 +3,6 @@ package uk.oczadly.karl.aoc20.day8;
 import uk.oczadly.karl.aoc20.Helper;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
@@ -17,21 +16,21 @@ import java.util.stream.Stream;
 public class Day8Part2 {
     
     public static void main(String[] args) {
-        Computer comp = Computer.load(Helper.streamInput(8));
-        System.out.printf("Loaded %,d program instructions...%n", comp.instructions.size());
+        VirtualMachine vm = VirtualMachine.loadImage(Helper.streamInput(8));
+        System.out.printf("Loaded %,d program instructions...%n", vm.instructions.size());
     
         // Array is used for doesExecute - it's declared here so it can be reused for performance optimizations
-        boolean[] executed = new boolean[comp.instructions.size()];
+        boolean[] executed = new boolean[vm.instructions.size()];
         
         // Try modifying each instruction, one by one
-        for (Instruction instr : comp.instructions) {
+        for (Instruction instr : vm.instructions) {
             Operation op = instr.op;
             if (op == Operation.JUMP || op == Operation.NO_OP) {
                 instr.op = op == Operation.JUMP ? Operation.NO_OP : Operation.JUMP; // Swap operation
-                if (doesExecute(comp, executed)) {
+                if (doesExecute(vm, executed)) {
                     // Found a working solution
                     System.out.printf("Found working program! Final accumulator value = %d%n",
-                            comp.accumulator);
+                            vm.accumulator);
                     break;
                 }
                 instr.op = op; // Didn't fix - return op to previous
@@ -39,25 +38,26 @@ public class Day8Part2 {
         }
     }
     
-    public static boolean doesExecute(Computer comp, boolean[] executed) {
+    /** Returns true if the program loaded into the VM executes successfully. */
+    public static boolean doesExecute(VirtualMachine vm, boolean[] executed) {
         Arrays.fill(executed, false); // Clear re-used array
-        comp.reset(); // Reset the computer's state
+        vm.reset(); // Reset the VM's state
         do {
-            if (comp.instrIndex >= comp.instructions.size()) break;
-            if (executed[comp.instrIndex])
+            if (vm.instrIndex >= vm.instructions.size()) break;
+            if (executed[vm.instrIndex])
                 return false; // Infinite loop found
-            executed[comp.instrIndex] = true;
-        } while (comp.execute());
+            executed[vm.instrIndex] = true;
+        } while (vm.execute());
         // Return true if the program ended on the last instruction index + 1
-        return comp.instrIndex == comp.instructions.size();
+        return vm.instrIndex == vm.instructions.size();
     }
     
     
-    static class Computer {
+    static class VirtualMachine {
         int instrIndex, accumulator;
         final List<Instruction> instructions;
         
-        public Computer(List<Instruction> instructions) {
+        public VirtualMachine(List<Instruction> instructions) {
             this.instructions = instructions;
         }
     
@@ -81,9 +81,10 @@ public class Day8Part2 {
             if (instrIndex >= instructions.size()) return null; // End of program
             return instructions.get(instrIndex);
         }
-        
-        public static Computer load(Stream<String> instructions) {
-            return new Computer(instructions
+    
+        /** Loads a VM image from a stream of raw string data. */
+        public static VirtualMachine loadImage(Stream<String> instructions) {
+            return new VirtualMachine(instructions
                     .map(Instruction::parse)
                     .collect(Collectors.toList()));
         }
@@ -101,7 +102,7 @@ public class Day8Part2 {
             this.num = num;
         }
         
-        public void execute(Computer c) {
+        public void execute(VirtualMachine c) {
             op.execution.accept(c, num);
         }
         
@@ -113,14 +114,14 @@ public class Day8Part2 {
     }
     
     enum Operation {
-        NO_OP       ("nop", (c, i) -> {}),
-        JUMP        ("jmp", (c, i) -> c.instrIndex += (i - 1)), // Minus 1 to negate the default index increment
-        ACCUMULATOR ("acc", (c, i) -> c.accumulator += i);
+        NO_OP       ("nop", (vm, i) -> {}),
+        JUMP        ("jmp", (vm, i) -> vm.instrIndex += (i - 1)), // Minus 1 to negate the default index increment
+        ACCUMULATOR ("acc", (vm, i) -> vm.accumulator += i);
         
         
         final String opcode;
-        final BiConsumer<Computer, Integer> execution;
-        Operation(String opcode, BiConsumer<Computer, Integer> execution) {
+        final BiConsumer<VirtualMachine, Integer> execution;
+        Operation(String opcode, BiConsumer<VirtualMachine, Integer> execution) {
             this.opcode = opcode;
             this.execution = execution;
         }

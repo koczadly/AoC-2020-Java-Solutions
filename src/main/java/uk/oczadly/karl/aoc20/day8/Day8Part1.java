@@ -16,32 +16,32 @@ import java.util.stream.Stream;
 public class Day8Part1 {
     
     public static void main(String[] args) {
-        Computer comp = Computer.load(Helper.streamInput(8));
-        System.out.printf("Loaded %,d program instructions...%n", comp.instructions.size());
+        VirtualMachine vm = VirtualMachine.loadImage(Helper.streamInput(8));
+        System.out.printf("Loaded %,d program instructions...%n", vm.instructions.size());
         
-        boolean[] executed = new boolean[comp.instructions.size()]; // Tracks what instructions have been executed
+        boolean[] executed = new boolean[vm.instructions.size()]; // Tracks what instructions have been executed
         int prevInstrIndex = 0, prevAccumulator = 0;
         
         do {
-            if (comp.instrIndex >= comp.instructions.size()) break;
-            if (executed[comp.instrIndex]) {
+            if (vm.instrIndex >= vm.instructions.size()) break;
+            if (executed[vm.instrIndex]) {
                 // Already executed, found solution!
                 System.out.printf("Instruction %d caused an infinite loop.%nFinal accumulator value = %d%n",
                         prevInstrIndex, prevAccumulator);
                 break;
             }
-            executed[comp.instrIndex] = true;
-            prevInstrIndex = comp.instrIndex;
-            prevAccumulator = comp.accumulator;
-        } while (comp.execute());
+            executed[vm.instrIndex] = true;
+            prevInstrIndex = vm.instrIndex;
+            prevAccumulator = vm.accumulator;
+        } while (vm.execute());
     }
     
     
-    static class Computer {
+    static class VirtualMachine {
         int instrIndex, accumulator;
         final List<Instruction> instructions;
         
-        public Computer(List<Instruction> instructions) {
+        public VirtualMachine(List<Instruction> instructions) {
             this.instructions = Collections.unmodifiableList(instructions);
         }
     
@@ -61,8 +61,9 @@ public class Day8Part1 {
             return instructions.get(instrIndex);
         }
         
-        public static Computer load(Stream<String> instructions) {
-            return new Computer(instructions
+        /** Loads a VM image from a stream of raw string data. */
+        public static VirtualMachine loadImage(Stream<String> instructions) {
+            return new VirtualMachine(instructions
                     .map(Instruction::parse)
                     .collect(Collectors.toList()));
         }
@@ -80,7 +81,7 @@ public class Day8Part1 {
             this.num = num;
         }
         
-        public void execute(Computer c) {
+        public void execute(VirtualMachine c) {
             op.execution.accept(c, num);
         }
         
@@ -92,14 +93,14 @@ public class Day8Part1 {
     }
     
     enum Operation {
-        NO_OP       ("nop", (c, i) -> {}),
-        JUMP        ("jmp", (c, i) -> c.instrIndex += (i - 1)), // Minus 1 to negate the default index increment
-        ACCUMULATOR ("acc", (c, i) -> c.accumulator += i);
+        NO_OP       ("nop", (vm, i) -> {}),
+        JUMP        ("jmp", (vm, i) -> vm.instrIndex += (i - 1)), // Minus 1 to negate the default index increment
+        ACCUMULATOR ("acc", (vm, i) -> vm.accumulator += i);
         
         
         final String opcode;
-        final BiConsumer<Computer, Integer> execution;
-        Operation(String opcode, BiConsumer<Computer, Integer> execution) {
+        final BiConsumer<VirtualMachine, Integer> execution;
+        Operation(String opcode, BiConsumer<VirtualMachine, Integer> execution) {
             this.opcode = opcode;
             this.execution = execution;
         }
