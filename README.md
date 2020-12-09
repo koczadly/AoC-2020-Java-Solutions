@@ -23,7 +23,7 @@ Day | Part 1 | Part 2
 6 | ✔️ [[Standard]](src/main/java/uk/oczadly/karl/aoc20/day6/Day6Part1.java) | ✔ [[Standard]](src/main/java/uk/oczadly/karl/aoc20/day6/Day6Part2.java)
 7 | ✔️ [[Standard]](src/main/java/uk/oczadly/karl/aoc20/day7/Day7Part1.java)  | ✔ [[Standard]](src/main/java/uk/oczadly/karl/aoc20/day7/Day7Part2.java)
 8 | ✔️ [[Standard]](src/main/java/uk/oczadly/karl/aoc20/day8/Day8Part1.java) [[Minimal]](src/main/java/uk/oczadly/karl/aoc20/day8/Day8Part1Simple.java) | ✔ [[Standard]](src/main/java/uk/oczadly/karl/aoc20/day8/Day8Part2.java)
-9 | ❌ | ❌
+9 | ✔️ [[Standard]](src/main/java/uk/oczadly/karl/aoc20/day9/Day9Part1.java)  | ✔ [[Standard]](src/main/java/uk/oczadly/karl/aoc20/day9/Day9Part2.java)
 10 | ❌ | ❌
 11 | ❌ | ❌
 12 | ❌ | ❌
