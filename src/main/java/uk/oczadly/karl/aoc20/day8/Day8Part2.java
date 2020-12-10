@@ -22,6 +22,7 @@ public class Day8Part2 {
         
         // Try modifying each instruction, one by one
         Solver solver = new Solver(vm);
+        
         for (Instruction instr : vm.instructions) {
             Operation op = instr.op;
             if (op == Operation.JUMP || op == Operation.NO_OP) {
@@ -95,13 +96,6 @@ public class Day8Part2 {
             if (instrIndex < 0) throw new IllegalStateException("Invalid instruction index.");
             if (instrIndex >= instructions.size()) return null; // End of program
             return instructions.get(instrIndex);
-        }
-    
-        /** Loads a VM image from a stream of raw string data. */
-        public static VirtualMachine loadImage(Stream<String> instructions) {
-            return new VirtualMachine(instructions
-                    .map(Instruction::parse)
-                    .collect(Collectors.toList()));
         }
     }
     
