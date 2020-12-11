@@ -16,7 +16,7 @@ public class ResourceInputRetriever implements InputRetriever {
     
     
     @Override
-    public InputData forDay(int day) throws InputRetrievalException {
+    public InputData fetchInput(int day) throws InputRetrievalException {
         URL resource = InputData.class.getClassLoader().getResource(dirs + "/day" + day + ".txt");
         if (resource == null)
             throw new InputRetrievalException("Input resource not found.");

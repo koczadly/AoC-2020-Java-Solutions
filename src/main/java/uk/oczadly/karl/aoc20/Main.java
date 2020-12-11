@@ -27,7 +27,6 @@ import uk.oczadly.karl.aoc20.solution.day8.Day8Part2;
 import uk.oczadly.karl.aoc20.solution.day9.Day9Part1;
 import uk.oczadly.karl.aoc20.solution.day9.Day9Part2;
 
-import java.io.PrintStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -61,9 +60,8 @@ public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
             // Run all puzzle solutions
-            for (int day = 1; day <= 25; day++) {
+            for (int day = 1; day <= 25; day++)
                 process(day, false);
-            }
         } else if (args.length == 1) {
             // Run for day
             process(Integer.parseInt(args[0]), true);
@@ -114,7 +112,7 @@ public class Main {
     
     private static void run(PuzzleSolution sol) {
         try {
-            InputData input = INPUT_RETRIEVER.forDay(sol.getDay());
+            InputData input = INPUT_RETRIEVER.fetchInput(sol.getDay());
             // Run solution
             try {
                 Object result = sol.solve(input);
