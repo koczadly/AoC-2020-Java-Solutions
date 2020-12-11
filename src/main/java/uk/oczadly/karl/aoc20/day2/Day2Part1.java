@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public class Day2Part1 {
     
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         long count = Helper.streamInput(2)
                 .map(PasswordEntry::parse)
                 .filter(PasswordEntry::isValid)
@@ -31,9 +31,9 @@ public class Day2Part1 {
     
         /** Returns true if the given password meets the criteria set by this password policy. */
         public boolean matches(String s) {
-            int count = 0;
-            for (char c : s.toCharArray())
-                if (c == this.c) count++;
+            int count = (int)s.chars()
+                    .filter(c -> c == this.c)
+                    .count();
             return count >= min && count <= max;
         }
     }
