@@ -9,14 +9,14 @@ import java.util.List;
  */
 public class Day1Part1 {
     
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         List<Integer> ints = Helper.loadInput(1, Integer::parseInt);
-        loop: for (int i : ints) {
+        
+        for (int i : ints) {
             for (int j : ints) {
                 if (i != j && i + j == 2020) {
-                    System.out.printf("%d + %d = 2020, %1$d * %2$d = %d%n",
-                            i, j, i * j);
-                            break loop;
+                    System.out.printf("%d + %d = 2020, %1$d * %2$d = %d%n", i, j, i * j);
+                    return;
                 }
             }
         }
