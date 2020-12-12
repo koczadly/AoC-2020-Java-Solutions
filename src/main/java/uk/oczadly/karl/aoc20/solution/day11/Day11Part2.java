@@ -17,7 +17,7 @@ public class Day11Part2 extends PuzzleSolution {
     @Override
     public Object solve(PuzzleInput input) {
         // Load grid
-        SeatGrid seatGrid = new SeatGrid(input.asCharGrid(SeatState.INDEX_CHAR::valueOf));
+        SeatGrid seatGrid = new SeatGrid(input.asGrid(SeatState.INDEX_CHAR::valueOf));
     
         // Run iterations until complete
         while (seatGrid.nextIteration());

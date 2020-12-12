@@ -61,21 +61,21 @@ public final class PuzzleInput {
     }
     
     /**
-     * Loads the input data as a {@link Grid2D} grid object.
+     * Loads the input data as a {@link Grid2D} grid object, where each character represents an element in the table.
      * <p>The input data can only be read once, after it will be exhausted.</p>
      * @return a 2D grid representing the input data
      */
-    public Grid2D<Character> asCharGrid() {
+    public Grid2D<Character> asGrid() {
         return Grid2D.fromLines(asList());
     }
     
     /**
-     * Loads the input data as a {@link Grid2D} grid object.
+     * Loads the input data as a {@link Grid2D} grid object, where each character represents an element in the table.
      * <p>The input data can only be read once, after it will be exhausted.</p>
      * @param mapper a function to convert each character to the element type
      * @return a 2D grid representing the input data
      */
-    public <T> Grid2D<T> asCharGrid(Function<Character, T> mapper) {
+    public <T> Grid2D<T> asGrid(Function<Character, T> mapper) {
         return Grid2D.fromLines(asList(), mapper);
     }
     

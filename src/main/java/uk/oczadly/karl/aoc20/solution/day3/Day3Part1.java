@@ -15,7 +15,7 @@ public class Day3Part1 extends PuzzleSolution {
     
     @Override
     public Object solve(PuzzleInput input) {
-        Grid2D<Boolean> grid = Grid2D.fromLines(input.asList(), c -> c == '#');  // Tree = true
+        Grid2D<Boolean> grid = input.asGrid(c -> c == '#');  // Tree = true
         
         int collisions = 0, x = 0, y = 0;
         do {

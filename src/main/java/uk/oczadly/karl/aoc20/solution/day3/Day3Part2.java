@@ -17,7 +17,7 @@ public class Day3Part2 extends PuzzleSolution {
     
     @Override
     public Object solve(PuzzleInput input) {
-        Grid2D<Boolean> grid = Grid2D.fromLines(input.asList(), c -> c == '#'); // Tree = true
+        Grid2D<Boolean> grid = input.asGrid(c -> c == '#'); // Tree = true
         
         Stream<TraversalStrategy> strategies = Stream.of(
                 new TraversalStrategy(1, 1),
