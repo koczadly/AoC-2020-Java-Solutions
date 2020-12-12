@@ -14,10 +14,10 @@ public class Day5Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
+    public Object solve(InputData input) {
         // Populate seats array (true = occupied)
         boolean[][] seats = new boolean[128][8];
-        inputData.asStream()
+        input.asStream()
                 .map(Day5Part2::parseSeat)
                 .forEach(seat -> seats[seat.row][seat.column] = true);
         

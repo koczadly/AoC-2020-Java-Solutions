@@ -13,8 +13,8 @@ public class Day5Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
-        return inputData.asStream()
+    public Object solve(InputData input) {
+        return input.asStream()
                 .map(Day5Part1::parseSeat)
                 .mapToInt(Seat::getId)
                 .max().getAsInt();

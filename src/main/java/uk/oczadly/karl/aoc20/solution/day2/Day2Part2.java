@@ -16,8 +16,8 @@ public class Day2Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
-        return inputData.asStream()
+    public Object solve(InputData input) {
+        return input.asStream()
                 .map(PasswordEntry::parse)
                 .filter(PasswordEntry::isValid)
                 .count();

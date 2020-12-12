@@ -39,10 +39,10 @@ public abstract class PuzzleSolution {
     
     /**
      * Solve the puzzle for the given input.
-     * @param inputData the input data
+     * @param input the input data
      * @return the solution
      */
-    public abstract Object solve(InputData inputData);
+    public abstract Object solve(InputData input);
     
     
     @Override

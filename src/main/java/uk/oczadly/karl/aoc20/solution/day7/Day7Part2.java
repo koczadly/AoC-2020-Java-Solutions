@@ -25,9 +25,9 @@ public class Day7Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
+    public Object solve(InputData input) {
         // Load bag rules in
-        Map<String, Set<ContainingBagRule>> bagRules = loadBagRules(inputData.asStream());
+        Map<String, Set<ContainingBagRule>> bagRules = loadBagRules(input.asStream());
     
         // Calculate bag counts
         return calculateBagCount(TARGET_COLOUR, bagRules, new HashMap<>());

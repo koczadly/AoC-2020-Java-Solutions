@@ -2,6 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day4;
 
 import uk.oczadly.karl.aoc20.input.InputData;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
+import uk.oczadly.karl.aoc20.util.EnumIndexer;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -21,11 +22,11 @@ public class Day4Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
+    public Object solve(InputData input) {
         int valid = 0;
         EnumSet<FieldType> presentFields = EnumSet.noneOf(FieldType.class);
         
-        List<String> data = inputData.asList();
+        List<String> data = input.asList();
         data.add(""); // Add empty line to process final group
         for (String ln : data) {
             if (ln.isEmpty()) { // Empty line
@@ -35,7 +36,7 @@ public class Day4Part1 extends PuzzleSolution {
             } else {
                 Matcher m = FIELD_PATTERN.matcher(ln);
                 while (m.find())
-                    presentFields.add(FieldType.ofCodename(m.group(1)));
+                    presentFields.add(FieldType.INDEX_CODENAME.valueOf(m.group(1)));
             }
         }
         return valid;
@@ -59,20 +60,16 @@ public class Day4Part1 extends PuzzleSolution {
         EYE_COLOUR      ("ecl", true),
         PASSPORT_ID     ("pid", true),
         COUNTRY_ID      ("cid", false);
+    
+        
+        public static final EnumIndexer<FieldType, String> INDEX_CODENAME =
+                new EnumIndexer<>(FieldType.class, e -> e.codename);
         
         final String codename;
         final boolean required;
         FieldType(String codename, boolean required) {
             this.codename = codename;
             this.required = required;
-        }
-        
-        public static FieldType ofCodename(String codename) {
-            for (FieldType p : values()) {
-                if (p.codename.equalsIgnoreCase(codename))
-                    return p;
-            }
-            throw new IllegalArgumentException("Unknown property codename.");
         }
     }
     

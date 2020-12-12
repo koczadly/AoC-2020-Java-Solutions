@@ -2,9 +2,8 @@ package uk.oczadly.karl.aoc20.solution.day11;
 
 import uk.oczadly.karl.aoc20.input.InputData;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
-
-import java.util.Arrays;
-import java.util.List;
+import uk.oczadly.karl.aoc20.util.EnumIndexer;
+import uk.oczadly.karl.aoc20.util.Grid2D;
 
 /**
  * @author Karl Oczadly
@@ -16,63 +15,61 @@ public class Day11Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
-        SeatMap seatMap = SeatMap.load(inputData.asList());
-        while (seatMap.nextIteration());
+    public Object solve(InputData input) {
+        // Load grid
+        SeatGrid seatGrid = new SeatGrid(Grid2D.fromLines(
+                input.asList(), SeatState.INDEX_CHAR::valueOf));
         
-        return Arrays.stream(seatMap.seatData).flatMap(Arrays::stream)
+        // Run iterations until complete
+        while (seatGrid.nextIteration());
+        
+        // Count occupied seats
+        return seatGrid.grid.streamElements()
                 .filter(s -> s == SeatState.SEAT_OCCUPIED)
                 .count();
     }
     
     
-    static class SeatMap {
-        private SeatState[][] seatData, nextSeatData;
-        private final int width, height;
+    static class SeatGrid {
+        private Grid2D<SeatState> grid, nextGrid;
     
-        public SeatMap(SeatState[][] seatData, int width, int height) {
-            this.seatData = seatData;
-            this.nextSeatData = new SeatState[height][width];
-            this.width = width;
-            this.height = height;
+        public SeatGrid(Grid2D<SeatState> grid) {
+            this.grid = grid;
+            this.nextGrid = new Grid2D<>(grid.getWidth(), grid.getHeight());
         }
         
         
-        public SeatState getSeat(int row, int col) {
-            if (row < 0 || row >= height || col < 0 || col >= width)
-                return SeatState.FLOOR;
-            return seatData[row][col];
+        public SeatState getSeat(int x, int y) {
+            return grid.getOutOfBounds(x, y, SeatState.FLOOR);
         }
-    
+        
         public boolean nextIteration() {
-            // Solve each seat
+            // Process mutations
             boolean hasChanged = false;
-            for (int row = 0; row < height; row++) {
-                for (int col = 0; col < width; col++) {
-                    SeatState currentState = getSeat(row, col);
-                    SeatState nextState = nextIteration(row, col);
-                    nextSeatData[row][col] = nextState;
-                    if (currentState != nextState)
+            for (int x = 0; x < grid.getWidth(); x++) {
+                for (int y = 0; y < grid.getHeight(); y++) {
+                    SeatState nextState = nextIteration(x, y);
+                    nextGrid.set(x, y, nextState);
+                    if (grid.get(x, y) != nextState)
                         hasChanged = true;
                 }
             }
-            
             // Apply changes
-            SeatState[][] oldArr = seatData; // Reuse existing array
-            seatData = nextSeatData;
-            nextSeatData = oldArr;
+            Grid2D<SeatState> oldGrid = grid; // Reuse existing grid object
+            grid = nextGrid;
+            nextGrid = oldGrid;
             return hasChanged;
         }
-    
-        private SeatState nextIteration(int row, int col) {
-            SeatState state = getSeat(row, col);
+        
+        private SeatState nextIteration(int x, int y) {
+            SeatState state = getSeat(x, y);
             if (state != SeatState.FLOOR) {
                 // Count neighbours
                 int neighbours = 0;
-                for (int r = -1; r <= 1; r++) {
-                    for (int c = -1; c <= 1; c++) {
-                        if (r == 0 && c == 0) continue;
-                        if (getSeat(row + r, col + c) == SeatState.SEAT_OCCUPIED)
+                for (int deltaX = -1; deltaX <= 1; deltaX++) {
+                    for (int deltaY = -1; deltaY <= 1; deltaY++) {
+                        if (deltaX == 0 && deltaY == 0) continue;
+                        if (getSeat(x + deltaX, y + deltaY) == SeatState.SEAT_OCCUPIED)
                             neighbours++;
                     }
                 }
@@ -85,35 +82,19 @@ public class Day11Part1 extends PuzzleSolution {
             }
             return state;
         }
-        
-        public static SeatMap load(List<String> input) {
-            int width = input.get(0).length();
-            SeatState[][] arr = new SeatState[input.size()][width];
-            for (int row = 0; row < input.size(); row++) {
-                String rowData = input.get(row);
-                for (int col = 0; col < rowData.length(); col++) {
-                    arr[row][col] = SeatState.valueOfChar(rowData.charAt(col));
-                }
-            }
-            return new SeatMap(arr, width, input.size());
-        }
     }
-    
     
     enum SeatState {
         FLOOR         ('.'),
         SEAT_EMPTY    ('L'),
         SEAT_OCCUPIED ('#');
         
+        public static final EnumIndexer<SeatState, Character> INDEX_CHAR =
+                new EnumIndexer<>(SeatState.class, e -> e.character);
+        
         final char character;
         SeatState(char character) {
             this.character = character;
-        }
-        
-        public static SeatState valueOfChar(char c) {
-            for (SeatState seat : SeatState.values())
-                if (seat.character == c) return seat;
-            throw new IllegalArgumentException("Unknown seat char.");
         }
     }
     

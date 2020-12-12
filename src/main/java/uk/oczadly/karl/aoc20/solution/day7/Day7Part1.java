@@ -25,9 +25,9 @@ public class Day7Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
+    public Object solve(InputData input) {
         // Load the direct bag rules in
-        Map<String, Set<String>> bagRules = loadBagRules(inputData.asStream());
+        Map<String, Set<String>> bagRules = loadBagRules(input.asStream());
     
         return bagRules.keySet().stream()
                 .filter(c -> containsTargetColour(c, bagRules))

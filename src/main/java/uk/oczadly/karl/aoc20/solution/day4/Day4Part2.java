@@ -2,6 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day4;
 
 import uk.oczadly.karl.aoc20.input.InputData;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
+import uk.oczadly.karl.aoc20.util.EnumIndexer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,9 +22,9 @@ public class Day4Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
+    public Object solve(InputData input) {
         // Each map represents a single ID, with a value for each field
-        List<String> data = inputData.asList();
+        List<String> data = input.asList();
         data.add(""); // Add empty line to process final group
         List<Map<FieldType, String>> ids = loadIds(data);
 
@@ -62,7 +63,7 @@ public class Day4Part2 extends PuzzleSolution {
                     currentId = new HashMap<>();
                 Matcher m = FIELD_PATTERN.matcher(ln);
                 while (m.find())
-                    currentId.put(FieldType.ofCodename(m.group(1)), m.group(2));
+                    currentId.put(FieldType.INDEX_CODENAME.valueOf(m.group(1)), m.group(2));
             }
         }
         return loaded;
@@ -84,19 +85,15 @@ public class Day4Part2 extends PuzzleSolution {
         PASSPORT_ID     ("pid", Pattern.compile("^\\d{9}$").asPredicate()),
         COUNTRY_ID      ("cid", null);
         
+        
+        public static final EnumIndexer<FieldType, String> INDEX_CODENAME =
+                new EnumIndexer<>(FieldType.class, e -> e.codename);
+        
         final String codename;
         final Predicate<String> validator;
         FieldType(String codename, Predicate<String> validator) {
             this.codename = codename;
             this.validator = validator;
-        }
-        
-        public static FieldType ofCodename(String codename) {
-            for (FieldType p : values()) {
-                if (p.codename.equalsIgnoreCase(codename))
-                    return p;
-            }
-            throw new IllegalArgumentException("Unknown property codename.");
         }
     
         /** Helper function for validation lambdas. */

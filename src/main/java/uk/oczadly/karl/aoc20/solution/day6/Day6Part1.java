@@ -17,8 +17,8 @@ public class Day6Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
-        List<String> data = inputData.asList();
+    public Object solve(InputData input) {
+        List<String> data = input.asList();
         data.add(""); // Add empty line to process final group
     
         int result = 0;

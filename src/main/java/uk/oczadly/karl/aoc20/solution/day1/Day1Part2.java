@@ -16,8 +16,8 @@ public class Day1Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
-        List<Integer> ints = inputData.asList(Integer::valueOf);
+    public Object solve(InputData input) {
+        List<Integer> ints = input.asList(Integer::valueOf);
         
         for (int i : ints) {
             for (int j : ints) {

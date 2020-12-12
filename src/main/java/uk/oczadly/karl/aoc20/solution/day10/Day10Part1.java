@@ -16,8 +16,8 @@ public class Day10Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
-        List<Integer> adapters = inputData.asList(Integer::parseInt);
+    public Object solve(InputData input) {
+        List<Integer> adapters = input.asList(Integer::parseInt);
         Collections.sort(adapters);
         
         int prev = 0, diff1 = 0, diff3 = 1;

@@ -1,8 +1,9 @@
 package uk.oczadly.karl.aoc20.solution.day8;
 
-import uk.oczadly.karl.aoc20.input.InputData;
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
+import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.util.EnumIndexer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,9 +21,9 @@ public class Day8Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
+    public Object solve(InputData input) {
         // Load virtual machine image
-        VirtualMachine vm = new VirtualMachine(inputData.asList(Instruction::parse));
+        VirtualMachine vm = new VirtualMachine(input.asList(Instruction::parse));
         
         // Try modifying each instruction, one by one
         Solver solver = new Solver(vm);
@@ -38,6 +39,7 @@ public class Day8Part2 extends PuzzleSolution {
                 instr.op = op; // Didn't fix - return op to previous
             }
         }
+        
         throw new NoSolutionFoundException();
     }
     
@@ -121,7 +123,9 @@ public class Day8Part2 extends PuzzleSolution {
         public static Instruction parse(String instr) {
             Matcher m = INSTRUCTION_PATTERN.matcher(instr);
             if (!m.matches()) throw new IllegalArgumentException("Invalid instruction format");
-            return new Instruction(Operation.fromOpCode(m.group(1)), Integer.parseInt(m.group(2)));
+            return new Instruction(
+                    Operation.INDEX_OPCODE.valueOf(m.group(1)),
+                    Integer.parseInt(m.group(2)));
         }
     }
     
@@ -129,19 +133,16 @@ public class Day8Part2 extends PuzzleSolution {
         NO_OP       ("nop", (vm, i) -> {}),
         JUMP        ("jmp", (vm, i) -> vm.instrIndex += (i - 1)), // Minus 1 to negate the default index increment
         ACCUMULATOR ("acc", (vm, i) -> vm.accumulator += i);
-        
+    
+    
+        public static final EnumIndexer<Operation, String> INDEX_OPCODE =
+                new EnumIndexer<>(Operation.class, e -> e.opcode);
         
         final String opcode;
         final BiConsumer<VirtualMachine, Integer> execution;
         Operation(String opcode, BiConsumer<VirtualMachine, Integer> execution) {
             this.opcode = opcode;
             this.execution = execution;
-        }
-    
-        public static Operation fromOpCode(String code) {
-            for (Operation op : Operation.values())
-                if (op.opcode.equalsIgnoreCase(code)) return op;
-            throw new IllegalArgumentException("Unknown operation.");
         }
     }
     

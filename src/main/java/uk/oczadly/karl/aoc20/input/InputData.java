@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 /**
  * @author Karl Oczadly
  */
-public class InputData {
+public final class InputData {
     
     private final InputStream is;
     

@@ -15,8 +15,8 @@ public class Day10Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
-        List<Integer> adapters = inputData.asList(Integer::parseInt);
+    public Object solve(InputData input) {
+        List<Integer> adapters = input.asList(Integer::parseInt);
         Collections.sort(adapters);
         return new Solver(adapters).solve();
     }
