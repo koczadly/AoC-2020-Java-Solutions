@@ -120,10 +120,10 @@ public class Main {
             try {
                 long startTime = System.nanoTime();
                 Object result = sol.solve(input);
-                long timeTaken = System.nanoTime() - startTime;
+                double timeTaken = (System.nanoTime() - startTime) / 1e9;
                 if (result != null) {
                     System.out.printf("[%.3fs] Day %d Part %d (v%d) = %s%n",
-                            timeTaken / 1e9, sol.getDay(), sol.getPart(), sol.getRevision(), result);
+                            timeTaken, sol.getDay(), sol.getPart(), sol.getRevision(), result);
                 } else {
                     printError(sol, "Result was null");
                 }
