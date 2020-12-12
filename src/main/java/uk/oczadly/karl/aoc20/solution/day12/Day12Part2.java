@@ -2,6 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day12;
 
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
+import uk.oczadly.karl.aoc20.util.InputUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,9 +11,6 @@ import java.util.regex.Pattern;
  * @author Karl Oczadly
  */
 public class Day12Part2 extends PuzzleSolution {
-    
-    static final Pattern INPUT_PATTERN = Pattern.compile("^(\\w)(\\d+)$");
-    
     
     public Day12Part2() {
         super(12, 2); // Initializes the day and part number
@@ -24,6 +22,7 @@ public class Day12Part2 extends PuzzleSolution {
     
         // Process each instruction
         input.asStream()
+                .map(InputUtil.mapRegex("^(\\w)(\\d+)$"))
                 .forEachOrdered(ship::readInstruction);
     
         // Return manhattan distance from origin (0, 0)
@@ -71,12 +70,10 @@ public class Day12Part2 extends PuzzleSolution {
         }
     
         /** Parses an instruction from the input, and processes it. */
-        public void readInstruction(String str) {
-            Matcher m = INPUT_PATTERN.matcher(str);
-            if (!m.matches()) throw new IllegalArgumentException("Invalid input.");
-            int val = Integer.parseInt(m.group(2));
+        public void readInstruction(Matcher input) {
+            int val = Integer.parseInt(input.group(2));
     
-            switch (m.group(1).charAt(0)) {
+            switch (input.group(1).charAt(0)) {
                 case 'N': // Move waypoint north
                     wp.yOff += val; break;
                 case 'S': // Move waypoint south

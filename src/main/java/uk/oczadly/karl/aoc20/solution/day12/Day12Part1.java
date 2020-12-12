@@ -13,9 +13,6 @@ import java.util.regex.Pattern;
  */
 public class Day12Part1 extends PuzzleSolution {
     
-    static final Pattern INPUT_PATTERN = Pattern.compile("^(\\w)(\\d+)$");
-    
-    
     public Day12Part1() {
         super(12, 1); // Initializes the day and part number
     }
@@ -26,7 +23,7 @@ public class Day12Part1 extends PuzzleSolution {
         
         // Process each instruction
         input.asStream()
-                .map(InputUtil.mapRegex(INPUT_PATTERN))
+                .map(InputUtil.mapRegex("^(\\w)(\\d+)$"))
                 .forEachOrdered(ship::move);
         
         // Return manhattan distance from origin (0, 0)

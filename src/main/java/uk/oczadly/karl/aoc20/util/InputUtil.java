@@ -17,5 +17,9 @@ public class InputUtil {
             return m;
         };
     }
+    
+    public static Function<String, Matcher> mapRegex(String pattern) {
+        return mapRegex(Pattern.compile(pattern));
+    }
 
 }
