@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day7;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
 import java.util.HashMap;
@@ -25,7 +25,7 @@ public class Day7Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         // Load bag rules in
         Map<String, Set<ContainingBagRule>> bagRules = loadBagRules(input.asStream());
     

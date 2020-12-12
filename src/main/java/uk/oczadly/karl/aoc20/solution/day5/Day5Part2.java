@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day5;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
@@ -14,7 +14,7 @@ public class Day5Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         // Populate seats array (true = occupied)
         boolean[][] seats = new boolean[128][8];
         input.asStream()

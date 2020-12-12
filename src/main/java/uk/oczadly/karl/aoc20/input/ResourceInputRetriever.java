@@ -16,12 +16,12 @@ public class ResourceInputRetriever implements InputRetriever {
     
     
     @Override
-    public InputData fetchInput(int day) throws InputRetrievalException {
-        URL resource = InputData.class.getClassLoader().getResource(dirs + "/day" + day + ".txt");
+    public PuzzleInput fetchInput(int day) throws InputRetrievalException {
+        URL resource = PuzzleInput.class.getClassLoader().getResource(dirs + "/day" + day + ".txt");
         if (resource == null)
             throw new InputRetrievalException("Input resource not found.");
         try {
-            return new InputData(resource.openStream());
+            return new PuzzleInput(resource.openStream());
         } catch (IOException e) {
             throw new InputRetrievalException(e);
         }

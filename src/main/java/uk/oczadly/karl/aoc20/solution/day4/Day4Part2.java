@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day4;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.util.EnumIndex;
 
@@ -22,7 +22,7 @@ public class Day4Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         // Each map represents a single ID, with a value for each field
         List<String> data = input.asList();
         data.add(""); // Add empty line to process final group

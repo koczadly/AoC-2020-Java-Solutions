@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day1;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
@@ -16,7 +16,7 @@ public class Day1Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         List<Integer> ints = input.asList(Integer::valueOf);
         
         for (int i : ints) {

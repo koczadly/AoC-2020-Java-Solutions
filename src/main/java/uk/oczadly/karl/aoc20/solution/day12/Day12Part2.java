@@ -1,7 +1,7 @@
 package uk.oczadly.karl.aoc20.solution.day12;
 
 import uk.oczadly.karl.aoc20.PuzzleSolution;
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +19,7 @@ public class Day12Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         Ship ship = new Ship(new Waypoint(10, 1)); // Starts with waypoint ahead 10 east, 1 north
     
         // Process each instruction

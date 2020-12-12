@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day6;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
 import java.util.HashSet;
@@ -17,7 +17,7 @@ public class Day6Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         List<String> data = input.asList();
         data.add(""); // Add empty line to process final group
     

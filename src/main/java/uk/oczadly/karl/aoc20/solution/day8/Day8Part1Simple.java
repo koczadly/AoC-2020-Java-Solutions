@@ -1,7 +1,7 @@
 package uk.oczadly.karl.aoc20.solution.day8;
 
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
 import java.util.List;
@@ -16,16 +16,16 @@ public class Day8Part1Simple extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
-        List<String> input = inputData.asList();
+    public Object solve(PuzzleInput input) {
+        List<String> in = input.asList();
         
         int instIndex = 0, acc = 0;
-        boolean[] seen = new boolean[input.size()];
-        while (instIndex < input.size()) {
+        boolean[] seen = new boolean[in.size()];
+        while (instIndex < in.size()) {
             if (seen[instIndex])
                 return acc; // Solution found
             seen[instIndex] = true;
-            String[] inst = input.get(instIndex++).split(" ");
+            String[] inst = in.get(instIndex++).split(" ");
             int val = Integer.parseInt(inst[1]);
             switch (inst[0]) { // Operator
                 case "acc": acc += val; break;

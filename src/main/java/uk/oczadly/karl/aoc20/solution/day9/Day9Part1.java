@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day9;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
@@ -16,15 +16,15 @@ public class Day9Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData inputData) {
-        List<Long> input = inputData.asList(Long::parseLong);
+    public Object solve(PuzzleInput input) {
+        List<Long> in = input.asList(Long::parseLong);
         
-        for (int i = 25; i < input.size(); i++) {
-            long num = input.get(i);
+        for (int i = 25; i < in.size(); i++) {
+            long num = in.get(i);
             boolean isValid = false;
             validCheck: for (int j = i - 25; j < i; j++) {
                 for (int k = i - 25; k < i; k++) {
-                    if (j != k && input.get(j) + input.get(k) == num) {
+                    if (j != k && in.get(j) + in.get(k) == num) {
                         isValid = true;
                         break validCheck;
                     }

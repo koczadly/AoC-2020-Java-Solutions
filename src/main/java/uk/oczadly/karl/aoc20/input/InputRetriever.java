@@ -5,6 +5,6 @@ package uk.oczadly.karl.aoc20.input;
  */
 public interface InputRetriever {
 
-    InputData fetchInput(int day) throws InputRetrievalException;
+    PuzzleInput fetchInput(int day) throws InputRetrievalException;
 
 }

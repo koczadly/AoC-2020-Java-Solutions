@@ -1,7 +1,7 @@
 package uk.oczadly.karl.aoc20.solution.day12;
 
 import uk.oczadly.karl.aoc20.PuzzleSolution;
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.util.EnumIndex;
 import uk.oczadly.karl.aoc20.util.InputUtil;
 
@@ -21,7 +21,7 @@ public class Day12Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         Ship ship = new Ship(Direction.EAST); // Starts facing east
         
         // Process each instruction

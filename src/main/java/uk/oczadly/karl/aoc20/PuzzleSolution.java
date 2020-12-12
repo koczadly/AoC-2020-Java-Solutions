@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 
 import java.util.Objects;
 
@@ -42,7 +42,7 @@ public abstract class PuzzleSolution {
      * @param input the input data
      * @return the solution
      */
-    public abstract Object solve(InputData input);
+    public abstract Object solve(PuzzleInput input);
     
     
     @Override

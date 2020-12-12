@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day11;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.util.EnumIndex;
 import uk.oczadly.karl.aoc20.util.Grid2D;
@@ -15,7 +15,7 @@ public class Day11Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         // Load grid
         SeatGrid seatGrid = new SeatGrid(Grid2D.fromLines(
                 input.asList(), SeatState.INDEX_CHAR::valueOf));

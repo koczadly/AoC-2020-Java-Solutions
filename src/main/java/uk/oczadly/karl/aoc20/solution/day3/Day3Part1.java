@@ -1,7 +1,7 @@
 package uk.oczadly.karl.aoc20.solution.day3;
 
 import uk.oczadly.karl.aoc20.PuzzleSolution;
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.util.Grid2D;
 
 /**
@@ -14,7 +14,7 @@ public class Day3Part1 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         Grid2D<Boolean> grid = Grid2D.fromLines(input.asList(), c -> c == '#');  // Tree = true
         
         int collisions = 0, x = 0, y = 0;

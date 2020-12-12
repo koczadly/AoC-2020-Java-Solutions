@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day2;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
 import java.util.regex.Matcher;
@@ -16,7 +16,7 @@ public class Day2Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         return input.asStream()
                 .map(PasswordEntry::parse)
                 .filter(PasswordEntry::isValid)

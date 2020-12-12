@@ -2,7 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day8;
 
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.util.EnumIndex;
 
 import java.util.Arrays;
@@ -21,7 +21,7 @@ public class Day8Part2 extends PuzzleSolution {
     }
     
     @Override
-    public Object solve(InputData input) {
+    public Object solve(PuzzleInput input) {
         // Load virtual machine image
         VirtualMachine vm = new VirtualMachine(input.asList(Instruction::parse));
         

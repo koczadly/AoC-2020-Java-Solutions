@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20;
 
-import uk.oczadly.karl.aoc20.input.InputData;
+import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.input.InputRetriever;
 import uk.oczadly.karl.aoc20.input.ResourceInputRetriever;
 import uk.oczadly.karl.aoc20.solution.day1.Day1Part1;
@@ -115,7 +115,7 @@ public class Main {
     
     private static void run(PuzzleSolution sol) {
         try {
-            InputData input = INPUT_RETRIEVER.fetchInput(sol.getDay());
+            PuzzleInput input = INPUT_RETRIEVER.fetchInput(sol.getDay());
             // Run solution
             try {
                 Object result = sol.solve(input);
