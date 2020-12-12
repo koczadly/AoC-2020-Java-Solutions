@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 public class InputUtil {
     
-    public static Function<String, Matcher> mapRegex(Pattern p) {
+    public static Function<String, Matcher> regexMapper(Pattern p) {
         return s -> {
             Matcher m = p.matcher(s);
             if (!m.matches())
@@ -18,8 +18,8 @@ public class InputUtil {
         };
     }
     
-    public static Function<String, Matcher> mapRegex(String pattern) {
-        return mapRegex(Pattern.compile(pattern));
+    public static Function<String, Matcher> regexMapper(String pattern) {
+        return regexMapper(Pattern.compile(pattern));
     }
 
 }

@@ -6,7 +6,6 @@ import uk.oczadly.karl.aoc20.util.EnumIndex;
 import uk.oczadly.karl.aoc20.util.InputUtil;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Karl Oczadly
@@ -23,7 +22,7 @@ public class Day12Part1 extends PuzzleSolution {
         
         // Process each instruction
         input.asStream()
-                .map(InputUtil.mapRegex("^(\\w)(\\d+)$"))
+                .map(InputUtil.regexMapper("^(\\w)(\\d+)$"))
                 .forEachOrdered(ship::move);
         
         // Return manhattan distance from origin (0, 0)
