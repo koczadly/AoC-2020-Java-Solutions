@@ -2,7 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day4;
 
 import uk.oczadly.karl.aoc20.input.InputData;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
-import uk.oczadly.karl.aoc20.util.EnumIndexer;
+import uk.oczadly.karl.aoc20.util.EnumIndex;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -62,8 +62,8 @@ public class Day4Part1 extends PuzzleSolution {
         COUNTRY_ID      ("cid", false);
     
         
-        public static final EnumIndexer<FieldType, String> INDEX_CODENAME =
-                new EnumIndexer<>(FieldType.class, e -> e.codename);
+        public static final EnumIndex<FieldType, String> INDEX_CODENAME =
+                new EnumIndex<>(FieldType.class, e -> e.codename);
         
         final String codename;
         final boolean required;

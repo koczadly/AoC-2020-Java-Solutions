@@ -8,11 +8,11 @@ import java.util.function.Function;
  * Indexes enum values by a specific property.
  * Allows for quick and dirty valueOf implementations.
  */
-public class EnumIndexer<E extends Enum<E>, T> {
+public class EnumIndex<E extends Enum<E>, T> {
     
     private final Map<T, E> map;
     
-    public EnumIndexer(Class<E> clazz, Function<E, T> mapper) {
+    public EnumIndex(Class<E> clazz, Function<E, T> mapper) {
         E[] enums = clazz.getEnumConstants();
         this.map = new HashMap<>(enums.length);
         for (E e : enums) {

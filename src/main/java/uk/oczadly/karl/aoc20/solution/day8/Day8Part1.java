@@ -3,7 +3,7 @@ package uk.oczadly.karl.aoc20.solution.day8;
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.input.InputData;
-import uk.oczadly.karl.aoc20.util.EnumIndexer;
+import uk.oczadly.karl.aoc20.util.EnumIndex;
 
 import java.util.Collections;
 import java.util.List;
@@ -97,8 +97,8 @@ public class Day8Part1 extends PuzzleSolution {
         ACCUMULATOR ("acc", (vm, i) -> vm.accumulator += i);
     
     
-        public static final EnumIndexer<Operation, String> INDEX_OPCODE =
-                new EnumIndexer<>(Operation.class, e -> e.opcode);
+        public static final EnumIndex<Operation, String> INDEX_OPCODE =
+                new EnumIndex<>(Operation.class, e -> e.opcode);
         
         final String opcode;
         final BiConsumer<VirtualMachine, Integer> execution;

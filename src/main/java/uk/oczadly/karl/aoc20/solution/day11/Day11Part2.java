@@ -2,7 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day11;
 
 import uk.oczadly.karl.aoc20.input.InputData;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
-import uk.oczadly.karl.aoc20.util.EnumIndexer;
+import uk.oczadly.karl.aoc20.util.EnumIndex;
 import uk.oczadly.karl.aoc20.util.Grid2D;
 
 /**
@@ -98,8 +98,8 @@ public class Day11Part2 extends PuzzleSolution {
         SEAT_EMPTY    ('L'),
         SEAT_OCCUPIED ('#');
         
-        public static final EnumIndexer<SeatState, Character> INDEX_CHAR =
-                new EnumIndexer<>(SeatState.class, e -> e.character);
+        public static final EnumIndex<SeatState, Character> INDEX_CHAR =
+                new EnumIndex<>(SeatState.class, e -> e.character);
         
         final char character;
         SeatState(char character) {

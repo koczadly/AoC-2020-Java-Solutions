@@ -2,7 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day12;
 
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.input.InputData;
-import uk.oczadly.karl.aoc20.util.EnumIndexer;
+import uk.oczadly.karl.aoc20.util.EnumIndex;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -69,7 +69,7 @@ public class Day12Part1 extends PuzzleSolution {
     enum Direction {
         NORTH(0, 0, 1), EAST(90, 1, 0), SOUTH(180, 0, -1), WEST(270, -1, 0);
         
-        static final EnumIndexer<Direction, Integer> INDEX_YAW = new EnumIndexer<>(Direction.class, e -> e.yaw);
+        static final EnumIndex<Direction, Integer> INDEX_YAW = new EnumIndex<>(Direction.class, e -> e.yaw);
         
         final int yaw, xMult, yMult;
         Direction(int yaw, int xMult, int yMult) {
