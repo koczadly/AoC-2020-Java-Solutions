@@ -5,7 +5,7 @@ Here are my Java solutions for the 2020 Advent of Code challenge. I'll be attemp
 You can attempt these awesome puzzles for yourself at https://adventofcode.com/2020.
 
 ### Technicalities
-These solutions are written using Java 9, and make heavy use of the built-in Streams API.
+These solutions use Java 9, and make heavy use of the built-in Streams API.
 
 The main method accepts 3 optional arguments: `[day] [part] [version]`. If no arguments are passed to the application,
  then it will run all of the solutions and print them to the console.
@@ -26,16 +26,16 @@ Day | Part 1 | Part 2
 10 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day10/Day10Part1.java)  | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day10/Day10Part2.java)
 11 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day11/Day11Part1.java)  | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day11/Day11Part2.java)
 12 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day12/Day12Part1.java)  | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day12/Day12Part2.java)
-13 | ❌ | ❌
-14 | ❌ | ❌
-15 | ❌ | ❌
-16 | ❌ | ❌
-17 | ❌ | ❌
-18 | ❌ | ❌
-19 | ❌ | ❌
-20 | ❌ | ❌
-21 | ❌ | ❌
-22 | ❌ | ❌
-23 | ❌ | ❌
-24 | ❌ | ❌
-25 | ❌ | ❌
+13 | 🕒 | 🕒
+14 | 🕒 | 🕒
+15 | 🕒 | 🕒
+16 | 🕒 | 🕒
+17 | 🕒 | 🕒
+18 | 🕒 | 🕒
+19 | 🕒 | 🕒
+20 | 🕒 | 🕒
+21 | 🕒 | 🕒
+22 | 🕒 | 🕒
+23 | 🕒 | 🕒
+24 | 🕒 | 🕒
+25 | 🕒 | 🕒
