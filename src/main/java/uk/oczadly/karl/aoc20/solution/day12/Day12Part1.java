@@ -43,30 +43,27 @@ public class Day12Part1 extends PuzzleSolution {
             char instCode = input.group(1).charAt(0);
             int val = Integer.parseInt(input.group(2));
             
-            Direction dir = Direction.INDEX_CHAR.valueOfNullable(instCode);
-            if (dir != null) {
-                // Instruction is a direction
-                x += dir.xMult * val;
-                y += dir.yMult * val;
-            } else if (instCode == 'L' || instCode == 'R') {
+            if (instCode == 'L' || instCode == 'R') {
                 // Turn direction
-                facing = facing.turn((instCode == 'R') ? val : -val);
+                facing = facing.turn(instCode == 'R' ? val : -val);
             } else if (instCode == 'F') {
                 // Move forward
-                x += val * facing.xMult;
-                y += val * facing.yMult;
+                x += facing.xMult * val;
+                y += facing.yMult * val;
             } else {
-                throw new IllegalArgumentException("Unknown instruction code.");
+                // Instruction is (hopefully) a direction
+                Direction dir = Direction.INDEX_CHAR.valueOf(instCode);
+                x += dir.xMult * val;
+                y += dir.yMult * val;
             }
         }
     }
-    
     
     enum Direction {
         NORTH(0, 0, 1), EAST(90, 1, 0), SOUTH(180, 0, -1), WEST(270, -1, 0);
     
         static final EnumIndex<Direction, Character> INDEX_CHAR =
-                new EnumIndex<>(Direction.class, e -> e.name().charAt(0));
+                new EnumIndex<>(Direction.class, e -> e.name().charAt(0)); // Index by first char (eg. 'N')
         static final EnumIndex<Direction, Integer> INDEX_YAW = new EnumIndex<>(Direction.class, e -> e.yaw);
         
         final int yaw, xMult, yMult;

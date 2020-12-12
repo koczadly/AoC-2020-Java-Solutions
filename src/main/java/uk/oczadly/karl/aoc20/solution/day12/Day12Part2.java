@@ -30,55 +30,54 @@ public class Day12Part2 extends PuzzleSolution {
     
     
     static class Waypoint {
-        int xOffset, yOffset;
+        int x, y; // X and Y values are offsets from the ship, starting at (0, 0)
         
         public Waypoint(int x, int y) {
-            this.xOffset = x;
-            this.yOffset = y;
+            this.x = x;
+            this.y = y;
         }
         
         /** Rotates the waypoint clockwise around (0, 0) */
         public void rotate(int degrees) {
             if (degrees == 90 || degrees == 270) {
-                int tmpX = xOffset;
-                xOffset = yOffset;
-                yOffset = -tmpX;
+                int tmpX = x;
+                x = y;
+                y = -tmpX;
             }
             if (degrees == 180 || degrees == 270) {
-                xOffset = -xOffset;
-                yOffset = -yOffset;
+                x = -x;
+                y = -y;
             }
         }
     }
     
     static class Ship {
         int x, y;
-        Waypoint wp;
+        Waypoint waypoint;
         
-        public Ship(Waypoint wp) {
-            this.wp = wp;
+        public Ship(Waypoint waypoint) {
+            this.waypoint = waypoint;
         }
     
         /** Parses an instruction from the input, and processes it. */
         public void readInstruction(Matcher input) {
             int val = Integer.parseInt(input.group(2));
-    
             switch (input.group(1).charAt(0)) {
                 case 'N': // Move waypoint north
-                    wp.yOffset += val; break;
+                    waypoint.y += val; break;
                 case 'S': // Move waypoint south
-                    wp.yOffset -= val; break;
+                    waypoint.y -= val; break;
                 case 'E': // Move waypoint east
-                    wp.xOffset += val; break;
+                    waypoint.x += val; break;
                 case 'W': // Move waypoint west
-                    wp.xOffset -= val; break;
+                    waypoint.x -= val; break;
                 case 'L': // Rotate waypoint anticlockwise
-                    wp.rotate(360 - val); break;
+                    waypoint.rotate(360 - val); break;
                 case 'R': // Rotate waypoint clockwise
-                    wp.rotate(val); break;
+                    waypoint.rotate(val); break;
                 case 'F': // Move ship towards waypoint
-                    x += val * wp.xOffset;
-                    y += val * wp.yOffset;
+                    x += waypoint.x * val;
+                    y += waypoint.y * val;
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown instruction code.");
