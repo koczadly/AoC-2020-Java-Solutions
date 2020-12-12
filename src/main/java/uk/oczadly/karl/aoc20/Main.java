@@ -117,8 +117,8 @@ public class Main {
             try {
                 Object result = sol.solve(input);
                 if (result != null) {
-                    System.out.printf("[%s] Day %d Part %d (v%d) = %s%n",
-                            sol.getClass().getSimpleName(), sol.getDay(), sol.getPart(), sol.getRevision(), result);
+                    System.out.printf("Day %d Part %d (v%d) = %s%n",
+                            sol.getDay(), sol.getPart(), sol.getRevision(), result);
                 } else {
                     printError(sol, "Result was null");
                 }
@@ -137,8 +137,8 @@ public class Main {
     }
     
     private static void printError(PuzzleSolution sol, String msg) {
-        System.err.printf("[%s] Day %d Part %d (v%d): %s%n",
-                sol.getClass().getSimpleName(), sol.getDay(), sol.getPart(), sol.getRevision(), msg);
+        System.err.printf("Day %d Part %d (v%d): %s%n",
+                sol.getDay(), sol.getPart(), sol.getRevision(), msg);
     }
     
 }
