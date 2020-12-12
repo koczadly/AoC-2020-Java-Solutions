@@ -18,10 +18,13 @@ public class Day12Part1 extends PuzzleSolution {
     
     @Override
     public Object solve(InputData input) {
-        Ship ship = new Ship(Direction.EAST);
+        Ship ship = new Ship(Direction.EAST); // Starts facing east
         
-        input.asStream().forEachOrdered(ship::move);
+        // Process each instruction
+        input.asStream()
+                .forEachOrdered(ship::move);
         
+        // Return manhattan distance from origin (0, 0)
         return Math.abs(ship.x) + Math.abs(ship.y);
     }
     
@@ -40,27 +43,23 @@ public class Day12Part1 extends PuzzleSolution {
         public void move(String str) {
             Matcher m = INPUT_PATTERN.matcher(str);
             if (!m.matches()) throw new IllegalArgumentException("Invalid input.");
+            char instCode = m.group(1).charAt(0);
             int val = Integer.parseInt(m.group(2));
             
-            switch (m.group(1).charAt(0)) {
-                case 'N':
-                    y += val; break;
-                case 'S':
-                    y -= val; break;
-                case 'E':
-                    x += val; break;
-                case 'W':
-                    x -= val; break;
-                case 'L':
-                    facing = facing.turn(-val); break;
-                case 'R':
-                    facing = facing.turn(val); break;
-                case 'F':
-                    x += val * facing.xMult;
-                    y += val * facing.yMult;
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown instruction code.");
+            Direction dir = Direction.INDEX_CHAR.valueOfNullable(instCode);
+            if (dir != null) {
+                // Instruction is a direction
+                x += dir.xMult;
+                y += dir.yMult;
+            } else if (instCode == 'L' || instCode == 'R') {
+                // Turn direction
+                facing = facing.turn((instCode == 'R') ? val : -val);
+            } else if (instCode == 'F') {
+                // Move forward
+                x += val * facing.xMult;
+                y += val * facing.yMult;
+            } else {
+                throw new IllegalArgumentException("Unknown instruction code.");
             }
         }
     }
@@ -68,7 +67,9 @@ public class Day12Part1 extends PuzzleSolution {
     
     enum Direction {
         NORTH(0, 0, 1), EAST(90, 1, 0), SOUTH(180, 0, -1), WEST(270, -1, 0);
-        
+    
+        static final EnumIndex<Direction, Character> INDEX_CHAR =
+                new EnumIndex<>(Direction.class, e -> e.name().charAt(0));
         static final EnumIndex<Direction, Integer> INDEX_YAW = new EnumIndex<>(Direction.class, e -> e.yaw);
         
         final int yaw, xMult, yMult;

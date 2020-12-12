@@ -17,10 +17,13 @@ public class Day12Part2 extends PuzzleSolution {
     
     @Override
     public Object solve(InputData input) {
-        Ship ship = new Ship(new Waypoint(10, 1));
-        
-        input.asStream().forEachOrdered(ship::readInstruction);
-        
+        Ship ship = new Ship(new Waypoint(10, 1)); // Starts with waypoint ahead 10 east, 1 north
+    
+        // Process each instruction
+        input.asStream()
+                .forEachOrdered(ship::readInstruction);
+    
+        // Return manhattan distance from origin (0, 0)
         return Math.abs(ship.x) + Math.abs(ship.y);
     }
     
@@ -30,14 +33,15 @@ public class Day12Part2 extends PuzzleSolution {
     
     static class Waypoint {
         int xOff, yOff;
+        
         public Waypoint(int x, int y) {
             this.xOff = x;
             this.yOff = y;
         }
         
         public void rotate(int degrees) {
-            degrees = Math.floorMod(degrees, 360);
-            int x = xOff;
+            degrees = Math.floorMod(degrees, 360); // Convert to positive number (0, 90, 180, 270)
+            int x = xOff; // Temp copy of xOff
             switch (degrees) {
                 case 180:
                     xOff = -xOff;
@@ -60,6 +64,7 @@ public class Day12Part2 extends PuzzleSolution {
     static class Ship {
         int x, y;
         Waypoint wp;
+        
         public Ship(Waypoint wp) {
             this.wp = wp;
         }
