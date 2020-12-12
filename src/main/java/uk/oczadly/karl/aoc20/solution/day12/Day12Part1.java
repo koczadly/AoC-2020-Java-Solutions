@@ -3,6 +3,7 @@ package uk.oczadly.karl.aoc20.solution.day12;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.input.InputData;
 import uk.oczadly.karl.aoc20.util.EnumIndex;
+import uk.oczadly.karl.aoc20.util.InputUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,6 +12,9 @@ import java.util.regex.Pattern;
  * @author Karl Oczadly
  */
 public class Day12Part1 extends PuzzleSolution {
+    
+    static final Pattern INPUT_PATTERN = Pattern.compile("^(\\w)(\\d+)$");
+    
     
     public Day12Part1() {
         super(12, 1); // Initializes the day and part number
@@ -22,14 +26,13 @@ public class Day12Part1 extends PuzzleSolution {
         
         // Process each instruction
         input.asStream()
+                .map(InputUtil.mapRegex(INPUT_PATTERN))
                 .forEachOrdered(ship::move);
         
         // Return manhattan distance from origin (0, 0)
         return Math.abs(ship.x) + Math.abs(ship.y);
     }
     
-    
-    static final Pattern INPUT_PATTERN = Pattern.compile("^(\\w)(\\d+)$");
     
     static class Ship {
         int x, y;
@@ -38,19 +41,17 @@ public class Day12Part1 extends PuzzleSolution {
         public Ship(Direction facing) {
             this.facing = facing;
         }
-        
     
-        public void move(String str) {
-            Matcher m = INPUT_PATTERN.matcher(str);
-            if (!m.matches()) throw new IllegalArgumentException("Invalid input.");
-            char instCode = m.group(1).charAt(0);
-            int val = Integer.parseInt(m.group(2));
+        /** Parses an instruction from the input, and processes it. */
+        public void move(Matcher input) {
+            char instCode = input.group(1).charAt(0);
+            int val = Integer.parseInt(input.group(2));
             
             Direction dir = Direction.INDEX_CHAR.valueOfNullable(instCode);
             if (dir != null) {
                 // Instruction is a direction
-                x += dir.xMult;
-                y += dir.yMult;
+                x += dir.xMult * val;
+                y += dir.yMult * val;
             } else if (instCode == 'L' || instCode == 'R') {
                 // Turn direction
                 facing = facing.turn((instCode == 'R') ? val : -val);
@@ -79,8 +80,9 @@ public class Day12Part1 extends PuzzleSolution {
             this.yMult = yMult;
         }
         
-        public Direction turn(int val) {
-            return INDEX_YAW.valueOf(Math.floorMod(yaw + val, 360));
+        /** Returns the direction from turning this direction the specified degrees */
+        public Direction turn(int degrees) {
+            return INDEX_YAW.valueOf(Math.floorMod(yaw + degrees, 360));
         }
     }
     

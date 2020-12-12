@@ -11,6 +11,9 @@ import java.util.regex.Pattern;
  */
 public class Day12Part2 extends PuzzleSolution {
     
+    static final Pattern INPUT_PATTERN = Pattern.compile("^(\\w)(\\d+)$");
+    
+    
     public Day12Part2() {
         super(12, 2); // Initializes the day and part number
     }
@@ -28,9 +31,6 @@ public class Day12Part2 extends PuzzleSolution {
     }
     
     
-    static final Pattern INPUT_PATTERN = Pattern.compile("^(\\w)(\\d+)$");
-    
-    
     static class Waypoint {
         int xOff, yOff;
         
@@ -39,6 +39,7 @@ public class Day12Part2 extends PuzzleSolution {
             this.yOff = y;
         }
         
+        /** Rotates the waypoint clockwise around (0, 0) */
         public void rotate(int degrees) {
             degrees = Math.floorMod(degrees, 360); // Convert to positive number (0, 90, 180, 270)
             int x = xOff; // Temp copy of xOff
@@ -69,6 +70,7 @@ public class Day12Part2 extends PuzzleSolution {
             this.wp = wp;
         }
     
+        /** Parses an instruction from the input, and processes it. */
         public void readInstruction(String str) {
             Matcher m = INPUT_PATTERN.matcher(str);
             if (!m.matches()) throw new IllegalArgumentException("Invalid input.");
