@@ -25,7 +25,7 @@ Day | Part 1 | Part 2
 9 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day9/Day9Part1.java)  | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day9/Day9Part2.java)
 10 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day10/Day10Part1.java)  | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day10/Day10Part2.java)
 11 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day11/Day11Part1.java)  | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day11/Day11Part2.java)
-12 | ❌ | ❌
+12 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day12/Day12Part1.java)  | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day12/Day12Part2.java)
 13 | ❌ | ❌
 14 | ❌ | ❌
 15 | ❌ | ❌
