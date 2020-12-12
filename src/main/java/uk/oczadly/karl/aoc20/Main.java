@@ -118,10 +118,12 @@ public class Main {
             PuzzleInput input = INPUT_RETRIEVER.fetchInput(sol.getDay());
             // Run solution
             try {
+                long startTime = System.nanoTime();
                 Object result = sol.solve(input);
+                long timeTaken = System.nanoTime() - startTime;
                 if (result != null) {
-                    System.out.printf("Day %d Part %d (v%d) = %s%n",
-                            sol.getDay(), sol.getPart(), sol.getRevision(), result);
+                    System.out.printf("[%.3fs] Day %d Part %d (v%d) = %s%n",
+                            timeTaken / 1e9, sol.getDay(), sol.getPart(), sol.getRevision(), result);
                 } else {
                     printError(sol, "Result was null");
                 }
