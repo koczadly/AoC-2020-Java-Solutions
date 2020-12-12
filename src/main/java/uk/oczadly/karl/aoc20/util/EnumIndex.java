@@ -25,11 +25,15 @@ public class EnumIndex<E extends Enum<E>, T> {
     
     
     public E valueOf(T identifier) {
+        E val = valueOfNullable(identifier);
+        if (val == null)
+            throw new IllegalArgumentException("No enum corresponds to the given identifier \"" + identifier + "\".");
+        return val;
+    }
+    
+    public E valueOfNullable(T identifier) {
         if (identifier == null) throw new NullPointerException("Identifier argument cannot be null.");
-        E enumVal = map.get(identifier);
-        if (enumVal == null) throw new IllegalArgumentException("No enum corresponds to the given identifier \""
-                + identifier.toString() + "\".");
-        return enumVal;
+        return map.get(identifier);
     }
     
     public boolean exists(T identifier) {
