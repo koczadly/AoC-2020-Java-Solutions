@@ -17,7 +17,7 @@ public class EnumIndexer<E extends Enum<E>, T> {
         this.map = new HashMap<>(enums.length);
         for (E e : enums) {
             T val = mapper.apply(e);
-            if (map.put(val, e) != null) {
+            if (val != null && map.put(val, e) != null) {
                 throw new IllegalArgumentException("Value \"" + val + "\" is applicable to more than one enum.");
             }
         }
