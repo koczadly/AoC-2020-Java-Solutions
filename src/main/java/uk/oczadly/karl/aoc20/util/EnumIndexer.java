@@ -27,7 +27,8 @@ public class EnumIndexer<E extends Enum<E>, T> {
     public E valueOf(T identifier) {
         if (identifier == null) throw new NullPointerException("Identifier argument cannot be null.");
         E enumVal = map.get(identifier);
-        if (enumVal == null) throw new IllegalArgumentException("No such enum corresponds to the given identifier.");
+        if (enumVal == null) throw new IllegalArgumentException("No enum corresponds to the given identifier \""
+                + identifier.toString() + "\".");
         return enumVal;
     }
     
