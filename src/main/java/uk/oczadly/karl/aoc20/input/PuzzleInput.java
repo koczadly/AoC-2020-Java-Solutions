@@ -66,7 +66,7 @@ public final class PuzzleInput {
      * @return a 2D grid representing the input data
      */
     public Grid2D<Character> asGrid() {
-        return Grid2D.fromLines(asList());
+        return Grid2D.fromLineChars(asList());
     }
     
     /**
@@ -76,7 +76,7 @@ public final class PuzzleInput {
      * @return a 2D grid representing the input data
      */
     public <T> Grid2D<T> asGrid(Function<Character, T> mapper) {
-        return Grid2D.fromLines(asList(), mapper);
+        return Grid2D.fromLineChars(asList(), mapper);
     }
     
     

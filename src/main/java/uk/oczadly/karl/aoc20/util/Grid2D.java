@@ -69,11 +69,11 @@ public class Grid2D<T> {
     }
     
     
-    public static Grid2D<Character> fromLines(List<String> input) {
-        return fromLines(input, Function.identity());
+    public static Grid2D<Character> fromLineChars(List<String> input) {
+        return fromLineChars(input, Function.identity());
     }
     
-    public static <T> Grid2D<T> fromLines(List<String> input, Function<Character, T> mapper) {
+    public static <T> Grid2D<T> fromLineChars(List<String> input, Function<Character, T> mapper) {
         int width = input.isEmpty() ? 0 : input.get(0).length(), height = input.size();
         Object[][] arr = new Object[height][width];
         // Load into array
@@ -81,9 +81,22 @@ public class Grid2D<T> {
             String line = input.get(y);
             if (line.length() != width)
                 throw new IllegalArgumentException("Line widths do not match.");
-            for (int x = 0; x < width; x++) {
+            for (int x = 0; x < width; x++)
                 arr[y][x] = mapper.apply(line.charAt(x));
-            }
+        }
+        return new Grid2D<>(width, height, arr);
+    }
+    
+    public static <T> Grid2D<T> fromList(List<List<T>> list) {
+        int width = list.isEmpty() ? 0 : list.get(0).size(), height = list.size();
+        Object[][] arr = new Object[height][width];
+        // Load into array
+        for (int y = 0; y < height; y++) {
+            List<T> line = list.get(y);
+            if (line.size() != width)
+                throw new IllegalArgumentException("Line widths do not match.");
+            for (int x = 0; x < width; x++)
+                arr[y][x] = line.get(x);
         }
         return new Grid2D<>(width, height, arr);
     }
