@@ -16,10 +16,10 @@ import java.util.stream.Stream;
  */
 public final class PuzzleInput {
     
-    private final InputStream is;
+    private final BufferedReader br;
     
     public PuzzleInput(InputStream is) {
-        this.is = is;
+        this.br = new BufferedReader(new InputStreamReader(is));
     }
     
     
@@ -29,7 +29,19 @@ public final class PuzzleInput {
      * @return a stream of each line in the file
      */
     public Stream<String> asStream() {
-        return new BufferedReader(new InputStreamReader(is)).lines();
+        return br.lines();
+    }
+    
+    /**
+     * Reads the next line of input data.
+     * @return the line of data, or null
+     */
+    public String nextLine() {
+        try {
+            return br.readLine();
+        } catch (IOException e) {
+            throw new InputRetrievalException(e);
+        }
     }
     
     /**
@@ -81,7 +93,7 @@ public final class PuzzleInput {
     
     
     public void closeStream() throws IOException {
-        is.close();
+        br.close();
     }
     
 }
