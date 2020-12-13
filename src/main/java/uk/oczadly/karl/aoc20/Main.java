@@ -11,6 +11,8 @@ import uk.oczadly.karl.aoc20.solution.day11.Day11Part1;
 import uk.oczadly.karl.aoc20.solution.day11.Day11Part2;
 import uk.oczadly.karl.aoc20.solution.day12.Day12Part1;
 import uk.oczadly.karl.aoc20.solution.day12.Day12Part2;
+import uk.oczadly.karl.aoc20.solution.day13.Day13Part1;
+import uk.oczadly.karl.aoc20.solution.day13.Day13Part2;
 import uk.oczadly.karl.aoc20.solution.day2.Day2Part1;
 import uk.oczadly.karl.aoc20.solution.day2.Day2Part2;
 import uk.oczadly.karl.aoc20.solution.day3.Day3Part1;
@@ -53,7 +55,8 @@ public class Main {
             new Day9Part1(), new Day9Part2(),
             new Day10Part1(), new Day10Part2(),
             new Day11Part1(), new Day11Part2(),
-            new Day12Part1(), new Day12Part2());
+            new Day12Part1(), new Day12Part2(),
+            new Day13Part1());
     
     
     static final Comparator<PuzzleSolution> PROCESS_ORDER = Comparator.comparing(PuzzleSolution::getPart)
