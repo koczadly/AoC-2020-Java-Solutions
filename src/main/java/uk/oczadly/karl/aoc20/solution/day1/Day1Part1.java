@@ -18,14 +18,10 @@ public class Day1Part1 extends PuzzleSolution {
     @Override
     public Object solve(PuzzleInput input) {
         List<Integer> ints = input.asList(Integer::parseInt);
-        
-        for (int i : ints) {
-            for (int j : ints) {
-                if (i != j && i + j == 2020) {
+        for (int i : ints)
+            for (int j : ints)
+                if (i != j && i + j == 2020)
                     return i * j;
-                }
-            }
-        }
         throw new NoValidSolutionException();
     }
 
