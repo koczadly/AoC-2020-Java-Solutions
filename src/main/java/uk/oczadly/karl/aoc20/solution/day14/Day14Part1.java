@@ -56,7 +56,8 @@ public class Day14Part1 extends PuzzleSolution {
         public Mask(String mask) {
             this.mask = mask;
         }
-        
+    
+        /** Applies the mask to the given long value. */
         public long apply(long val) {
             int size = mask.length();
             long sizeMask = (1L << size) - 1;
@@ -71,6 +72,7 @@ public class Day14Part1 extends PuzzleSolution {
         }
     }
     
+    /** Sets a specific bit in a given long value to 1 or 0. */
     static long setBit(long val, int bit, int bitVal) {
         if (bitVal == 0) {
             return val & ~(1L << bit); // Set to 0

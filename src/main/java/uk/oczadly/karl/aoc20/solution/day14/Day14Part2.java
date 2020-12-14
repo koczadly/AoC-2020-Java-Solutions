@@ -64,6 +64,7 @@ public class Day14Part2 extends PuzzleSolution {
             calcCombinationVals();
         }
         
+        /** Applies the mask to the given long value. */
         public Set<Long> apply(long val) {
             int size = mask.length();
             long sizeMask = (1L << size) - 1;
@@ -86,9 +87,10 @@ public class Day14Part2 extends PuzzleSolution {
                     .collect(Collectors.toSet());
         }
     
+        /** Calculates and populates the 'combiVals' set. */
         private void calcCombinationVals() {
             // Calculate the values of each floating bit, and add them to a list (eg. 2^i, where i is the bit index)
-            List<Long> floatingVals = new ArrayList<>(); // Tracks the value associated with each floating bit
+            List<Long> floatingVals = new ArrayList<>();
             for (int i = 0; i < mask.length(); i++)
                 if (mask.charAt(mask.length() - i - 1) == 'X')
                     floatingVals.add(1L << i);
