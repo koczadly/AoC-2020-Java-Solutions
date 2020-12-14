@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day13;
 
-import uk.oczadly.karl.aoc20.NoSolutionFoundException;
+import uk.oczadly.karl.aoc20.input.NoValidSolutionException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 
@@ -32,7 +32,7 @@ public class Day13Part1 extends PuzzleSolution {
                 if (ts % busSchedule == 0)
                     return busSchedule * (ts - earliestTimestamp);
         }
-        throw new NoSolutionFoundException();
+        throw new NoValidSolutionException();
     }
 
 }

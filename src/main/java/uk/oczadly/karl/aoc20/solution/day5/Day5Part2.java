@@ -2,7 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day5;
 
 import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
-import uk.oczadly.karl.aoc20.NoSolutionFoundException;
+import uk.oczadly.karl.aoc20.input.NoValidSolutionException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
 /**
@@ -31,7 +31,7 @@ public class Day5Part2 extends PuzzleSolution {
                 }
             }
         }
-        throw new NoSolutionFoundException();
+        throw new NoValidSolutionException();
     }
     
     

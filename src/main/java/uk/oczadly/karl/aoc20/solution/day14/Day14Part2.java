@@ -106,12 +106,11 @@ public class Day14Part2 extends PuzzleSolution {
          * @param index        the current index in the list
          */
         private void calcCombinationVals(long val, List<Long> floatingVals, int index) {
+            combiVals.add(val);
             if (index >= floatingVals.size()) return;
             long currentVal = floatingVals.get(index);
-            combiVals.add(val);
-            combiVals.add(val + currentVal);
-            calcCombinationVals(val + currentVal, floatingVals, index + 1);
-            calcCombinationVals(val, floatingVals, index + 1);
+            calcCombinationVals(val, floatingVals, index + 1);              // With bit = 0
+            calcCombinationVals(val + currentVal, floatingVals, index + 1); // With bit = 1
         }
     }
     

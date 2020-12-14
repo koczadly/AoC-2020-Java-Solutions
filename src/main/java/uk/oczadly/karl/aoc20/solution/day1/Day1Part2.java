@@ -1,7 +1,7 @@
 package uk.oczadly.karl.aoc20.solution.day1;
 
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
-import uk.oczadly.karl.aoc20.NoSolutionFoundException;
+import uk.oczadly.karl.aoc20.input.NoValidSolutionException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class Day1Part2 extends PuzzleSolution {
                 }
             }
         }
-        throw new NoSolutionFoundException();
+        throw new NoValidSolutionException();
     }
 
 }

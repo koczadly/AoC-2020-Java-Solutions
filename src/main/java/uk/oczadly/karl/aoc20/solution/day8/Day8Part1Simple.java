@@ -1,6 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day8;
 
-import uk.oczadly.karl.aoc20.NoSolutionFoundException;
+import uk.oczadly.karl.aoc20.input.NoValidSolutionException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
@@ -32,7 +32,7 @@ public class Day8Part1Simple extends PuzzleSolution {
                 case "jmp": instIndex += val - 1; break;
             }
         }
-        throw new NoSolutionFoundException();
+        throw new NoValidSolutionException();
     }
     
 }

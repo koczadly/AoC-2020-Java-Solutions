@@ -1,8 +1,6 @@
 package uk.oczadly.karl.aoc20;
 
-import uk.oczadly.karl.aoc20.input.PuzzleInput;
-import uk.oczadly.karl.aoc20.input.InputRetriever;
-import uk.oczadly.karl.aoc20.input.ResourceInputRetriever;
+import uk.oczadly.karl.aoc20.input.*;
 import uk.oczadly.karl.aoc20.solution.day1.Day1Part1;
 import uk.oczadly.karl.aoc20.solution.day1.Day1Part2;
 import uk.oczadly.karl.aoc20.solution.day10.Day10Part1;
@@ -12,7 +10,6 @@ import uk.oczadly.karl.aoc20.solution.day11.Day11Part2;
 import uk.oczadly.karl.aoc20.solution.day12.Day12Part1;
 import uk.oczadly.karl.aoc20.solution.day12.Day12Part2;
 import uk.oczadly.karl.aoc20.solution.day13.Day13Part1;
-import uk.oczadly.karl.aoc20.solution.day13.Day13Part2;
 import uk.oczadly.karl.aoc20.solution.day14.Day14Part1;
 import uk.oczadly.karl.aoc20.solution.day14.Day14Part2;
 import uk.oczadly.karl.aoc20.solution.day2.Day2Part1;
@@ -133,7 +130,7 @@ public class Main {
                 } else {
                     printError(sol, "Result was null");
                 }
-            } catch (NoSolutionFoundException e) {
+            } catch (IllegalInputException e) {
                 printError(sol, e.getMessage());
             } catch (Throwable t) {
                 t.printStackTrace();
