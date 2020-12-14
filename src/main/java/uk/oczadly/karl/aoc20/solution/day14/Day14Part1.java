@@ -1,12 +1,10 @@
 package uk.oczadly.karl.aoc20.solution.day14;
 
-import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,19 +25,19 @@ public class Day14Part1 extends PuzzleSolution {
     @Override
     public Object solve(PuzzleInput input) {
         Map<Long, Long> memory = new HashMap<>();
-        Mask mask = null;
+        BitMask bitMask = null;
         
         for (String line : input) {
             Matcher m = PATTERN_MASK.matcher(line);
             if (m.matches()) {
                 // MASK
-                mask = new Mask(m.group(1));
+                bitMask = new BitMask(m.group(1));
             } else {
-                if (mask == null) throw new IllegalInputException("Memory value before mask.");
+                if (bitMask == null) throw new IllegalInputException("Memory value before mask.");
                 m = PATTERN_MEM.matcher(line);
                 if (!m.matches()) throw new IllegalInputException();
                 // MEM
-                long val = mask.apply(Long.parseUnsignedLong(m.group(2))); // Calculate value after mask
+                long val = bitMask.apply(Long.parseUnsignedLong(m.group(2))); // Calculate value after mask
                 memory.put(Long.parseUnsignedLong(m.group(1)), val); // Save in memory
             }
         }
@@ -51,9 +49,10 @@ public class Day14Part1 extends PuzzleSolution {
     }
     
     
-    static class Mask {
+    static class BitMask {
         final String mask;
-        public Mask(String mask) {
+        
+        public BitMask(String mask) {
             this.mask = mask;
         }
     
@@ -72,7 +71,7 @@ public class Day14Part1 extends PuzzleSolution {
         }
     }
     
-    /** Sets a specific bit in a given long value to 1 or 0. */
+    /** Helper method to set a specific bit in a given long value. */
     static long setBit(long val, int bit, int bitVal) {
         if (bitVal == 0) {
             return val & ~(1L << bit); // Set to 0

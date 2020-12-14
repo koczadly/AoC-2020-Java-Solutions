@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Karl Oczadly
@@ -38,9 +39,8 @@ public class Day14Part2 extends PuzzleSolution {
                 if (!m.matches()) throw new IllegalInputException();
                 // MEM
                 long val = Long.parseUnsignedLong(m.group(2));
-                for (long addr : mask.apply(Long.parseUnsignedLong(m.group(1)))) {
-                    memory.put(addr, val); // Save in memory
-                }
+                mask.apply(Long.parseUnsignedLong(m.group(1)))
+                        .forEach(v -> memory.put(v, val));
             }
         }
         
@@ -51,12 +51,14 @@ public class Day14Part2 extends PuzzleSolution {
     }
     
     
-    /**
-     * The 'combiVals' set contains each value which can be added to the result value to calculate all possible
-     * combinations of floating bits. Eg, if there are 4 floating bits, there will be 16 combination values (2^4).
-     */
     static class Mask {
         final String mask;
+        /*
+         * 'combiVals' contains each value which can be added to the result value (masked value, with all floating
+         * bits set to zero) to calculate all the possible combinations of floating bits. Eg. a mask "X10X" would result
+         * in 4 combination values: [0 (0000), 1 (0001), 8 (1000), 9 (1001)], so each call to apply() would return 4
+         * different values for this mask.
+         */
         final Set<Long> combiVals = new HashSet<>();
         
         public Mask(String mask) {
@@ -64,12 +66,12 @@ public class Day14Part2 extends PuzzleSolution {
             calcCombinationVals();
         }
         
-        /** Applies the mask to the given long value. */
-        public Set<Long> apply(long val) {
+        /** Applies the mask to the given long value. Returns a stream of values. */
+        public Stream<Long> apply(long val) {
             int size = mask.length();
             long sizeMask = (1L << size) - 1;
             
-            // Compute bits
+            // Process bits
             for (int i = 0; i < size; i++) {
                 char c = mask.charAt(size - i - 1);
                 if (c == '1') {
@@ -83,8 +85,7 @@ public class Day14Part2 extends PuzzleSolution {
             // Calculate possible values
             final long finalVal = val;
             return combiVals.stream()
-                    .map(v -> v + finalVal)
-                    .collect(Collectors.toSet());
+                    .map(v -> v + finalVal);
         }
     
         /** Calculates and populates the 'combiVals' set. */
@@ -114,7 +115,7 @@ public class Day14Part2 extends PuzzleSolution {
         }
     }
     
-    /** Sets a specific bit in a given long value to 1 or 0. */
+    /** Helper method to set a specific bit in a given long value. */
     static long setBit(long val, int bit, int bitVal) {
         if (bitVal == 0) {
             return val & ~(1L << bit); // Set to 0
