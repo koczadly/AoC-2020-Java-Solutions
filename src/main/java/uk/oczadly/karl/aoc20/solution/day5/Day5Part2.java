@@ -1,5 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day5;
 
+import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
@@ -51,7 +52,7 @@ public class Day5Part2 extends PuzzleSolution {
                     upper -= range / 2; break;
                 case 'B': case 'R':
                     lower += range / 2; break;
-                default: throw new IllegalArgumentException("Unknown movement char.");
+                default: throw new IllegalInputException("Unknown movement char.");
             }
         }
         if (lower != upper) throw new AssertionError();

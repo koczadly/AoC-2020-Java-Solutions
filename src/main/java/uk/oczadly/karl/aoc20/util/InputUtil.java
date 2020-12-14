@@ -1,5 +1,7 @@
 package uk.oczadly.karl.aoc20.util;
 
+import uk.oczadly.karl.aoc20.input.IllegalInputException;
+
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,7 +15,7 @@ public class InputUtil {
         return s -> {
             Matcher m = p.matcher(s);
             if (!m.matches())
-                throw new IllegalArgumentException("Pattern did not match input data.");
+                throw new IllegalInputException("Pattern did not match input data.");
             return m;
         };
     }

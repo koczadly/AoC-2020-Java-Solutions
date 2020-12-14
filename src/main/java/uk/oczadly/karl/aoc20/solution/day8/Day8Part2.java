@@ -2,6 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day8;
 
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
+import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.util.EnumIndex;
 
@@ -122,7 +123,7 @@ public class Day8Part2 extends PuzzleSolution {
         
         public static Instruction parse(String instr) {
             Matcher m = INSTRUCTION_PATTERN.matcher(instr);
-            if (!m.matches()) throw new IllegalArgumentException("Invalid instruction format");
+            if (!m.matches()) throw new IllegalInputException("Invalid instruction format");
             return new Instruction(
                     Operation.INDEX_OPCODE.valueOf(m.group(1)),
                     Integer.parseInt(m.group(2)));

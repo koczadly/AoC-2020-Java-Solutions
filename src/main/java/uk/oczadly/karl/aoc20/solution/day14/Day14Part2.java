@@ -1,6 +1,7 @@
 package uk.oczadly.karl.aoc20.solution.day14;
 
 import uk.oczadly.karl.aoc20.PuzzleSolution;
+import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 
 import java.lang.reflect.Array;
@@ -32,9 +33,9 @@ public class Day14Part2 extends PuzzleSolution {
                 // MASK
                 mask = new Mask(m.group(1));
             } else {
-                if (mask == null) throw new IllegalArgumentException("Memory value before mask.");
+                if (mask == null) throw new IllegalInputException("Memory value before mask.");
                 m = PATTERN_MEM.matcher(line);
-                if (!m.matches()) throw new IllegalArgumentException();
+                if (!m.matches()) throw new IllegalInputException();
                 // MEM
                 long val = Long.parseUnsignedLong(m.group(2));
                 for (long addr : mask.apply(Long.parseUnsignedLong(m.group(1)))) {

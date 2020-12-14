@@ -6,7 +6,7 @@ package uk.oczadly.karl.aoc20;
 public class NoSolutionFoundException extends RuntimeException {
     
     public NoSolutionFoundException() {
-        this("No valid solution was found");
+        this("No valid solution was found.");
     }
     
     public NoSolutionFoundException(String message) {

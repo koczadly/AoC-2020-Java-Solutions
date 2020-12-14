@@ -2,6 +2,7 @@ package uk.oczadly.karl.aoc20.solution.day14;
 
 import uk.oczadly.karl.aoc20.NoSolutionFoundException;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
+import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 
 import java.util.HashMap;
@@ -34,9 +35,9 @@ public class Day14Part1 extends PuzzleSolution {
                 // MASK
                 mask = new Mask(m.group(1));
             } else {
-                if (mask == null) throw new IllegalArgumentException("Memory value before mask.");
+                if (mask == null) throw new IllegalInputException("Memory value before mask.");
                 m = PATTERN_MEM.matcher(line);
-                if (!m.matches()) throw new IllegalArgumentException();
+                if (!m.matches()) throw new IllegalInputException();
                 // MEM
                 long val = mask.apply(Long.parseUnsignedLong(m.group(2))); // Calculate value after mask
                 memory.put(Long.parseUnsignedLong(m.group(1)), val); // Save in memory

@@ -1,6 +1,7 @@
 package uk.oczadly.karl.aoc20.solution.day12;
 
 import uk.oczadly.karl.aoc20.PuzzleSolution;
+import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.util.InputUtil;
 
@@ -80,7 +81,7 @@ public class Day12Part2 extends PuzzleSolution {
                     y += waypoint.y * val;
                     break;
                 default:
-                    throw new IllegalArgumentException("Unknown instruction code.");
+                    throw new IllegalInputException("Unknown instruction code.");
             }
         }
     }

@@ -1,5 +1,6 @@
 package uk.oczadly.karl.aoc20.solution.day2;
 
+import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
 
@@ -61,7 +62,7 @@ public class Day2Part2 extends PuzzleSolution {
         /** Parses a password entry from the raw input data. */
         public static PasswordEntry parse(String s) {
             Matcher matcher = INPUT_MATCHER.matcher(s);
-            if (!matcher.matches()) throw new IllegalArgumentException("Invalid input");
+            if (!matcher.matches()) throw new IllegalInputException("Invalid input");
             
             return new PasswordEntry(matcher.group(4),
                     new PasswordPolicy(matcher.group(3).charAt(0),
