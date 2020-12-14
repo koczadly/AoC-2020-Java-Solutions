@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
 /**
  * @author Karl Oczadly
  */
-public final class PuzzleInput {
+public final class PuzzleInput implements Iterable<String> {
     
     private final BufferedReader br;
     
@@ -94,6 +95,11 @@ public final class PuzzleInput {
     
     public void closeStream() throws IOException {
         br.close();
+    }
+    
+    @Override
+    public Iterator<String> iterator() {
+        return asStream().iterator(); // TODO can only be consumed once!
     }
     
 }
