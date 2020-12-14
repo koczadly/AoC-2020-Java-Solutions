@@ -4,10 +4,10 @@ import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author Karl Oczadly
@@ -51,16 +51,22 @@ public class Day14Part2 extends PuzzleSolution {
     }
     
     
+    /**
+     * The 'combiVals' set contains each value which can be added to the result value to calculate all possible
+     * combinations of floating bits. Eg, if there are 4 floating bits, there will be 16 combination values (2^4).
+     */
     static class Mask {
         final String mask;
+        final Set<Long> combiVals = new HashSet<>();
+        
         public Mask(String mask) {
             this.mask = mask;
+            calcCombinationVals();
         }
         
         public Set<Long> apply(long val) {
             int size = mask.length();
             long sizeMask = (1L << size) - 1;
-            List<Long> floatingBitVals = new ArrayList<>(); // Tracks the value associated with each floating bit
             
             // Compute bits
             for (int i = 0; i < size; i++) {
@@ -68,16 +74,41 @@ public class Day14Part2 extends PuzzleSolution {
                 if (c == '1') {
                     val = setBit(val, i, 1);
                 } else if (c == 'X') {
-                    val = setBit(val, i, 0);
-                    floatingBitVals.add(1L << i);
+                    val = setBit(val, i, 0); // Set floating bits to zero
                 }
                 val &= sizeMask; // Ensure number is same length as mask
             }
             
             // Calculate possible values
-            Set<Long> result = new HashSet<>();
-            calculatePossibleVals(val, floatingBitVals, 0, result);
-            return result;
+            final long finalVal = val;
+            return combiVals.stream()
+                    .map(v -> v + finalVal)
+                    .collect(Collectors.toSet());
+        }
+    
+        private void calcCombinationVals() {
+            // Calculate the values of each floating bit, and add them to a list (eg. 2^i, where i is the bit index)
+            List<Long> floatingVals = new ArrayList<>(); // Tracks the value associated with each floating bit
+            for (int i = 0; i < mask.length(); i++)
+                if (mask.charAt(mask.length() - i - 1) == 'X')
+                    floatingVals.add(1L << i);
+            // Calc combinations
+            calcCombinationVals(0, floatingVals, 0);
+        }
+    
+        /**
+         * Recursive method to calculate all possible sequences.
+         * @param val          the current value
+         * @param floatingVals a list of values of each floating bit
+         * @param index        the current index in the list
+         */
+        private void calcCombinationVals(long val, List<Long> floatingVals, int index) {
+            if (index >= floatingVals.size()) return;
+            long currentVal = floatingVals.get(index);
+            combiVals.add(val);
+            combiVals.add(val + currentVal);
+            calcCombinationVals(val + currentVal, floatingVals, index + 1);
+            calcCombinationVals(val, floatingVals, index + 1);
         }
     }
     
@@ -88,24 +119,6 @@ public class Day14Part2 extends PuzzleSolution {
         } else {
             return val | (1L << bit); // Set to 1
         }
-    }
-    
-    /**
-     * Recursive method to calculate all possible sequences.
-     * For the first call, 'val' should be the value with all floating bits set to zero, index should be 0 and
-     * 'result' should be empty.
-     * @param val          the current value
-     * @param floatingVals a list of values of each floating bit
-     * @param index        the current index in the list
-     * @param result       a set of calculated values
-     */
-    static void calculatePossibleVals(long val, List<Long> floatingVals, int index, Set<Long> result) {
-        if (index >= floatingVals.size()) return;
-        long currentVal = floatingVals.get(index);
-        result.add(val);
-        result.add(val + currentVal);
-        calculatePossibleVals(val + currentVal, floatingVals, index + 1, result);
-        calculatePossibleVals(val, floatingVals, index + 1, result);
     }
 
 }
