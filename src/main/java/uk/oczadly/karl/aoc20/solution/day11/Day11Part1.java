@@ -18,8 +18,8 @@ public class Day11Part1 extends PuzzleSolution {
     public Object solve(PuzzleInput input) {
         // Load grid
         SeatGrid seatGrid = new SeatGrid(input.asGrid(SeatState.INDEX_CHAR::valueOf));
-        
-        // Run iterations until complete
+    
+        // Keep running iterations until complete (returns false after no changes have been made)
         while (seatGrid.nextIteration());
         
         // Count occupied seats
