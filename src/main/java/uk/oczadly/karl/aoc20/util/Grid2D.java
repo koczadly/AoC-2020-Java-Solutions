@@ -14,7 +14,7 @@ public class Grid2D<T> {
     private final Object[][] table; // [y/row][x/col]
     
     public Grid2D(int width, int height) {
-        this(width, height, (T)null);
+        this(width, height, null);
     }
     
     public Grid2D(int width, int height, T initialVal) {
@@ -29,7 +29,7 @@ public class Grid2D<T> {
         }
     }
     
-    private Grid2D(int width, int height, Object[][] table) {
+    private Grid2D(Object[][] table, int width, int height) {
         this.width = width;
         this.height = height;
         this.table = table;
@@ -50,8 +50,12 @@ public class Grid2D<T> {
         return (T)table[y][x];
     }
     
+    public T getOutOfBounds(int x, int y) {
+        return getOutOfBounds(x, y, null);
+    }
+    
     public T getOutOfBounds(int x, int y, T defaultVal) {
-        if (y < 0 || y >= height || x < 0 || x >= width)
+        if (!isInRange(x, y))
             return defaultVal;
         return (T)table[y][x];
     }
@@ -60,6 +64,10 @@ public class Grid2D<T> {
         if (x < 0 || x >= width) throw new IndexOutOfBoundsException("Invalid X index.");
         if (y < 0 || y >= height) throw new IndexOutOfBoundsException("Invalid Y index.");
         table[y][x] = value;
+    }
+    
+    public boolean isInRange(int x, int y) {
+        return x >= 0 || x < width || y >= 0 || y < height;
     }
     
     public Stream<T> streamElements() {
@@ -75,30 +83,38 @@ public class Grid2D<T> {
     
     public static <T> Grid2D<T> fromLineChars(List<String> input, Function<Character, T> mapper) {
         int width = input.isEmpty() ? 0 : input.get(0).length(), height = input.size();
-        Object[][] arr = new Object[height][width];
+        Object[][] table = new Object[height][width];
         // Load into array
         for (int y = 0; y < height; y++) {
             String line = input.get(y);
             if (line.length() != width)
                 throw new IllegalArgumentException("Line widths do not match.");
             for (int x = 0; x < width; x++)
-                arr[y][x] = mapper.apply(line.charAt(x));
+                table[y][x] = mapper.apply(line.charAt(x));
         }
-        return new Grid2D<>(width, height, arr);
+        return new Grid2D<>(table, width, height);
     }
     
     public static <T> Grid2D<T> fromList(List<List<T>> list) {
         int width = list.isEmpty() ? 0 : list.get(0).size(), height = list.size();
-        Object[][] arr = new Object[height][width];
+        Object[][] table = new Object[height][width];
         // Load into array
         for (int y = 0; y < height; y++) {
             List<T> line = list.get(y);
             if (line.size() != width)
                 throw new IllegalArgumentException("Line widths do not match.");
             for (int x = 0; x < width; x++)
-                arr[y][x] = line.get(x);
+                table[y][x] = line.get(x);
         }
-        return new Grid2D<>(width, height, arr);
+        return new Grid2D<>(table, width, height);
+    }
+    
+    public static <T> Grid2D<T> copyOf(Grid2D<T> grid) {
+        Object[][] table = new Object[grid.height][grid.width];
+        for (int i = 0; i < grid.height; i++) {
+            System.arraycopy(grid.table[i], 0, table[i], 0, grid.table[i].length);
+        }
+        return new Grid2D<>(table, grid.width, grid.height);
     }
     
 }
