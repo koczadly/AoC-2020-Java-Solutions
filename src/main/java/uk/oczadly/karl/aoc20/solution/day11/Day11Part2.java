@@ -24,7 +24,7 @@ public class Day11Part2 extends PuzzleSolution {
     
         // Count occupied seats
         return seatGrid.grid.streamElements()
-                .filter(s -> s == SeatState.SEAT_OCCUPIED)
+                .filter(s -> s == SeatState.SEAT_OCCUPIED) // Filter only occupied seats
                 .count();
     }
     
@@ -41,7 +41,8 @@ public class Day11Part2 extends PuzzleSolution {
         public SeatState getSeat(int x, int y) {
             return grid.getOutOfBounds(x, y, SeatState.FLOOR);
         }
-        
+    
+        /** Runs the next iteration for all cells, and returns true if at least one cell changed. */
         public boolean nextIteration() {
             // Process mutations
             boolean hasChanged = false;
@@ -53,13 +54,15 @@ public class Day11Part2 extends PuzzleSolution {
                         hasChanged = true;
                 }
             }
-            // Apply changes
-            Grid2D<SeatState> oldGrid = grid; // Reuse existing grid object
+            
+            // Apply changes, and reuse the existing grid object (swap the two grids)
+            Grid2D<SeatState> oldGrid = grid;
             grid = nextGrid;
             nextGrid = oldGrid;
             return hasChanged;
         }
         
+        /** Runs the next iteration for the single specified cell, returning the new state. */
         private SeatState nextIteration(int x, int y) {
             SeatState state = getSeat(x, y);
             if (state != SeatState.FLOOR) {
@@ -70,23 +73,24 @@ public class Day11Part2 extends PuzzleSolution {
                         if (checkNeighbour(x, y, dx, dy)) neighbours++;
                 // Mutate
                 if (state == SeatState.SEAT_EMPTY && neighbours == 0) {
-                    return SeatState.SEAT_OCCUPIED;
+                    return SeatState.SEAT_OCCUPIED; // Mutate to occupied
                 } else if (state == SeatState.SEAT_OCCUPIED && neighbours >= 5) {
-                    return SeatState.SEAT_EMPTY;
+                    return SeatState.SEAT_EMPTY; // Mutate to empty
                 }
             }
-            return state;
+            return state; // Cell state hasn't changed
         }
     
+        /** Returns true if there is a neighbour in the specified direction. */
         private boolean checkNeighbour(int xPos, int yPos, int deltaX, int deltaY) {
-            if (deltaX == 0 && deltaY == 0) return false;
+            if (deltaX == 0 && deltaY == 0) return false; // Checking self, not a neighbour
             int x = xPos, y = yPos;
             while (x >= 0 && x < grid.getWidth() && y >= 0 && y < grid.getHeight()) {
                 x += deltaX;
                 y += deltaY;
                 SeatState state = getSeat(x, y);
-                if (state != SeatState.FLOOR)
-                    return state == SeatState.SEAT_OCCUPIED;
+                if (state != SeatState.FLOOR) // Once we find a cell that isn't the floor, return and exit...
+                    return state == SeatState.SEAT_OCCUPIED; // Return true if occupied, false if not
             }
             return false;
         }

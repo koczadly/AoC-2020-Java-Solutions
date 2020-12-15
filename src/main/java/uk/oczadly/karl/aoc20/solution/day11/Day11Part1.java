@@ -24,7 +24,7 @@ public class Day11Part1 extends PuzzleSolution {
         
         // Count occupied seats
         return seatGrid.grid.streamElements()
-                .filter(s -> s == SeatState.SEAT_OCCUPIED)
+                .filter(s -> s == SeatState.SEAT_OCCUPIED) // Filter only occupied seats
                 .count();
     }
     
@@ -41,7 +41,8 @@ public class Day11Part1 extends PuzzleSolution {
         public SeatState getSeat(int x, int y) {
             return grid.getOutOfBounds(x, y, SeatState.FLOOR);
         }
-        
+    
+        /** Runs the next iteration for all cells, and returns true if at least one cell changed. */
         public boolean nextIteration() {
             // Process mutations
             boolean hasChanged = false;
@@ -53,13 +54,15 @@ public class Day11Part1 extends PuzzleSolution {
                         hasChanged = true;
                 }
             }
-            // Apply changes
-            Grid2D<SeatState> oldGrid = grid; // Reuse existing grid object
+            
+            // Apply changes, and reuse the existing grid object (swap the two grids)
+            Grid2D<SeatState> oldGrid = grid;
             grid = nextGrid;
             nextGrid = oldGrid;
             return hasChanged;
         }
-        
+    
+        /** Runs the next iteration for the single specified cell, returning the new state. */
         private SeatState nextIteration(int x, int y) {
             SeatState state = getSeat(x, y);
             if (state != SeatState.FLOOR) {
@@ -67,19 +70,19 @@ public class Day11Part1 extends PuzzleSolution {
                 int neighbours = 0;
                 for (int deltaX = -1; deltaX <= 1; deltaX++) {
                     for (int deltaY = -1; deltaY <= 1; deltaY++) {
-                        if (deltaX == 0 && deltaY == 0) continue;
+                        if (deltaX == 0 && deltaY == 0) continue; // Ignore self, not a neighbour
                         if (getSeat(x + deltaX, y + deltaY) == SeatState.SEAT_OCCUPIED)
                             neighbours++;
                     }
                 }
                 // Mutate
                 if (state == SeatState.SEAT_EMPTY && neighbours == 0) {
-                    return SeatState.SEAT_OCCUPIED;
+                    return SeatState.SEAT_OCCUPIED; // Mutate to occupied
                 } else if (state == SeatState.SEAT_OCCUPIED && neighbours >= 4) {
-                    return SeatState.SEAT_EMPTY;
+                    return SeatState.SEAT_EMPTY; // Mutate to empty
                 }
             }
-            return state;
+            return state; // Cell state hasn't changed
         }
     }
     
