@@ -36,6 +36,10 @@ public class Grid2D<T> {
     }
     
     
+    public int size() {
+        return width * height;
+    }
+    
     public int getWidth() {
         return width;
     }
@@ -67,7 +71,7 @@ public class Grid2D<T> {
     }
     
     public boolean isInRange(int x, int y) {
-        return x >= 0 || x < width || y >= 0 || y < height;
+        return x >= 0 && x < width && y >= 0 && y < height;
     }
     
     public Stream<T> streamElements() {
@@ -76,6 +80,23 @@ public class Grid2D<T> {
                 .map(o -> (T)o);
     }
     
+    @Override
+    public String toString() {
+        return "Grid2D{" +
+                "width=" + width +
+                ", height=" + height + '}';
+    }
+    
+    public String toString(Function<T, Character> charMapper) {
+        StringBuilder sb = new StringBuilder();
+        for (int y = 0; y < height; y++) {
+            if (sb.length() > 0) sb.append("\n");
+            for (int x = 0; x < width; x++) {
+                sb.append(charMapper.apply(get(x, y)));
+            }
+        }
+        return sb.toString();
+    }
     
     public static Grid2D<Character> fromLineChars(List<String> input) {
         return fromLineChars(input, Function.identity());
