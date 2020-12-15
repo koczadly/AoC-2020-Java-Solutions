@@ -86,9 +86,7 @@ public class Day11Part2 extends PuzzleSolution {
             if (deltaX == 0 && deltaY == 0) return false; // Checking self, not a neighbour
             int x = xPos, y = yPos;
             while (x >= 0 && x < grid.getWidth() && y >= 0 && y < grid.getHeight()) {
-                x += deltaX;
-                y += deltaY;
-                SeatState state = getSeat(x, y);
+                SeatState state = getSeat(x += deltaX, y += deltaY); // Increment x/y vals, and get state
                 if (state != SeatState.FLOOR) // Once we find a cell that isn't the floor, return and exit...
                     return state == SeatState.SEAT_OCCUPIED; // Return true if occupied, false if not
             }
