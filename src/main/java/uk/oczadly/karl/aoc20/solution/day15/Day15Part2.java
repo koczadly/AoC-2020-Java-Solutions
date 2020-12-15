@@ -17,8 +17,8 @@ public class Day15Part2 extends PuzzleSolution {
     
     @Override
     public Object solve(PuzzleInput input) {
-        // Literally nothing's changed from part 1 other than the iterations count... huh
-        // Just gonna completely re-use the solver class from Day15Part1, you can find the source there.
+        // Literally nothing has changed from part 1 other than the iterations count... huh.
+        // Just gonna completely re-use the method from Day15Part1, you can find the source there.
         
         return Day15Part1.solve(InputUtil.split(input.asString(), ",", Integer::parseInt), 30000000);
     }
