@@ -4,6 +4,7 @@ import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.util.InputUtil;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,17 +23,20 @@ public class Day15Part1 extends PuzzleSolution {
     
     
     public static int solve(List<Integer> input, int iterations) {
-        Map<Integer, Integer> lastIndexes = new HashMap<>(); // Number -> last spoken index
+        // Array of indexes, 0 = unseen. Using int array over Map<Integer, Integer> for performance reasons.
+        int[] lastIndexes = new int[iterations];
         int num = 0; // Stores the previous number
-        for (int i = 0; i < iterations; i++) {
-            if (i < input.size()) {
+        
+        for (int i = 1; i <= iterations; i++) {
+            if (i <= input.size()) {
                 // Use starting number from input
-                num = input.get(i);
-                lastIndexes.put(num, i);
+                num = input.get(i - 1);
+                lastIndexes[num] = i;
             } else {
                 // Use previous number
-                Integer lastSpokenIndex = lastIndexes.put(num, i - 1); // Add prev number to map and get last index
-                num = lastSpokenIndex == null ? 0 : (i - 1 - lastSpokenIndex); // Calculate diff from prev index
+                int lastSpokenIndex = lastIndexes[num]; // Get previous index of previous num
+                lastIndexes[num] = i - 1; // Store previous num index
+                num = lastSpokenIndex == 0 ? 0 : (i - 1 - lastSpokenIndex); // Calculate diff from prev index
             }
         }
         return num;
