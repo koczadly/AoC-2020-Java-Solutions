@@ -14,9 +14,7 @@ import java.util.regex.Pattern;
  */
 public class Day14Part1 extends PuzzleSolution {
     
-    public Day14Part1() {
-        super(14, 1); // Initializes the day and part number
-    }
+    public Day14Part1() { super(14, 1); } // Initializes the day and part number
     
     
     private static final Pattern PATTERN_MASK = Pattern.compile("^mask = ([10X]{36})$");

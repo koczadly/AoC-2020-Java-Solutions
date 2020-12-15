@@ -12,9 +12,7 @@ import java.util.Set;
  */
 public class Day6Part1 extends PuzzleSolution {
     
-    public Day6Part1() {
-        super(6, 1); // Initializes the day and part number
-    }
+    public Day6Part1() { super(6, 1); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {

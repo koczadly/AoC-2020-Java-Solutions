@@ -13,9 +13,7 @@ import java.util.stream.Collectors;
  */
 public class Day6Part2 extends PuzzleSolution {
     
-    public Day6Part2() {
-        super(6, 2); // Initializes the day and part number
-    }
+    public Day6Part2() { super(6, 2); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {

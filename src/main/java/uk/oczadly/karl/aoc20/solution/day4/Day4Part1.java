@@ -17,9 +17,7 @@ public class Day4Part1 extends PuzzleSolution {
     
     static final Pattern FIELD_PATTERN = Pattern.compile("(\\w+):(\\S+)");
     
-    public Day4Part1() {
-        super(4, 1); // Initializes the day and part number
-    }
+    public Day4Part1() { super(4, 1); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {

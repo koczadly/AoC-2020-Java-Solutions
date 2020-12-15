@@ -11,9 +11,7 @@ import java.util.List;
  */
 public class Day1Part1 extends PuzzleSolution {
     
-    public Day1Part1() {
-        super(1, 1); // Initializes the day and part number
-    }
+    public Day1Part1() { super(1, 1); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {

@@ -17,9 +17,7 @@ import java.util.regex.Pattern;
  */
 public class Day8Part1 extends PuzzleSolution {
     
-    public Day8Part1() {
-        super(8, 1, 1); // Initializes the day and part number
-    }
+    public Day8Part1() { super(8, 1, 1); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {

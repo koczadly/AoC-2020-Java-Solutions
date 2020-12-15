@@ -20,9 +20,7 @@ public class Day7Part2 extends PuzzleSolution {
             "(?:(^\\w+ \\w+) bags contain )|(?:\\G(\\d+) (\\w+ \\w+) bags?(?:, |.))");
     
     
-    public Day7Part2() {
-        super(7, 2); // Initializes the day and part number
-    }
+    public Day7Part2() { super(7, 2); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {

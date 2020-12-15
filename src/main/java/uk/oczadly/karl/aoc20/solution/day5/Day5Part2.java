@@ -10,9 +10,7 @@ import uk.oczadly.karl.aoc20.PuzzleSolution;
  */
 public class Day5Part2 extends PuzzleSolution {
     
-    public Day5Part2() {
-        super(5, 2); // Initializes the day and part number
-    }
+    public Day5Part2() { super(5, 2); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {

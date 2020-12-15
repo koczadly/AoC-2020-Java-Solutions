@@ -12,9 +12,7 @@ import java.util.regex.Matcher;
  */
 public class Day12Part1 extends PuzzleSolution {
     
-    public Day12Part1() {
-        super(12, 1); // Initializes the day and part number
-    }
+    public Day12Part1() { super(12, 1); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {

@@ -10,9 +10,7 @@ import uk.oczadly.karl.aoc20.util.Grid2D;
  */
 public class Day11Part1 extends PuzzleSolution {
     
-    public Day11Part1() {
-        super(11, 1); // Initializes the day and part number
-    }
+    public Day11Part1() { super(11, 1); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {

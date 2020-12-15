@@ -15,9 +15,7 @@ import java.util.stream.Stream;
  */
 public class Day14Part2 extends PuzzleSolution {
     
-    public Day14Part2() {
-        super(14, 2); // Initializes the day and part number
-    }
+    public Day14Part2() { super(14, 2); } // Initializes the day and part number
     
     
     private static final Pattern PATTERN_MASK = Pattern.compile("^mask = ([10X]{36})$");

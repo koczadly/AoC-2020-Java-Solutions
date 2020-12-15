@@ -145,6 +145,7 @@ public class Main {
             e.printStackTrace();
             printError(sol, "Unable to retrieve input data");
         }
+        System.gc();
     }
     
     private static void printError(PuzzleSolution sol, String msg) {
