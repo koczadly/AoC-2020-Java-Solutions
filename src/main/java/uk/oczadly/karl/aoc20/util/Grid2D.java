@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class Grid2D<T> {
 
     private final int width, height;
-    private final Object[][] table; // row (Y) -> column (X)
+    private final Object[][] table; // [y/row][x/col]
     
     public Grid2D(int width, int height) {
         this(width, height, (T)null);
@@ -65,7 +65,7 @@ public class Grid2D<T> {
     public Stream<T> streamElements() {
         return Arrays.stream(table)
                 .flatMap(Arrays::stream)
-                .map( o -> (T)o);
+                .map(o -> (T)o);
     }
     
     
