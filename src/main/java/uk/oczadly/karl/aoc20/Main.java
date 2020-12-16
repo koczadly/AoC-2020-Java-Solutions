@@ -14,6 +14,8 @@ import uk.oczadly.karl.aoc20.solution.day14.Day14Part1;
 import uk.oczadly.karl.aoc20.solution.day14.Day14Part2;
 import uk.oczadly.karl.aoc20.solution.day15.Day15Part1;
 import uk.oczadly.karl.aoc20.solution.day15.Day15Part2;
+import uk.oczadly.karl.aoc20.solution.day16.Day16Part1;
+import uk.oczadly.karl.aoc20.solution.day16.Day16Part2;
 import uk.oczadly.karl.aoc20.solution.day2.Day2Part1;
 import uk.oczadly.karl.aoc20.solution.day2.Day2Part2;
 import uk.oczadly.karl.aoc20.solution.day3.Day3Part1;
@@ -59,7 +61,8 @@ public class Main {
             new Day12Part1(), new Day12Part2(),
             new Day13Part1(),
             new Day14Part1(), new Day14Part2(),
-            new Day15Part1(), new Day15Part2());
+            new Day15Part1(), new Day15Part2(),
+            new Day16Part1(), new Day16Part2());
     
     
     static final Comparator<PuzzleSolution> PROCESS_ORDER = Comparator.comparing(PuzzleSolution::getPart)
@@ -134,6 +137,7 @@ public class Main {
                     printError(sol, "Result was null");
                 }
             } catch (IllegalInputException e) {
+                e.printStackTrace();
                 printError(sol, e.getMessage());
             } catch (Throwable t) {
                 t.printStackTrace();
