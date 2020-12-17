@@ -30,7 +30,7 @@ Day | Part 1 | Part 2 | Stars
 14 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day14/Day14Part1.java) | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day14/Day14Part2.java) | ⭐⭐
 15 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day15/Day15Part1.java) | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day15/Day15Part2.java) | ⭐⭐
 16 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day16/Day16Part1.java) | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day16/Day16Part2.java) | ⭐⭐
-17 | 🕒 | 🕒 |
+17 | ✔️ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day17/Day17Part1.java) | ✔ [[V1]](src/main/java/uk/oczadly/karl/aoc20/solution/day17/Day17Part2.java) | ⭐⭐
 18 | 🕒 | 🕒 |
 19 | 🕒 | 🕒 |
 20 | 🕒 | 🕒 |
