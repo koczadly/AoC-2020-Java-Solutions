@@ -22,7 +22,6 @@ public class Day2Part1 extends PuzzleSolution {
                 .count();
     }
     
-    
     static class PasswordEntry {
         static final Pattern INPUT_MATCHER = Pattern.compile("^(\\d+)-(\\d+) (\\w): (\\w+)$"); // 8-9 x: xxxxxxxrk
         

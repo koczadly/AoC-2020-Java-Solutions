@@ -22,7 +22,6 @@ public class Day2Part2 extends PuzzleSolution {
                 .count();
     }
     
-    
     static class PasswordEntry {
         static final Pattern INPUT_MATCHER = Pattern.compile("^(\\d+)-(\\d+) (\\w): (\\w+)$"); // 8-9 x: xxxxxxxrk
     
@@ -43,7 +42,7 @@ public class Day2Part2 extends PuzzleSolution {
         /** Returns true if the password meets the criteria set by the password policy. */
         public boolean isValid() {
             return (pswd.length() >= policyIdx1 && pswd.charAt(policyIdx1 - 1) == policyChar)
-                    ^ (pswd.length() >= policyIdx2 && pswd.charAt(policyIdx2 - 1) == policyChar);
+                    != (pswd.length() >= policyIdx2 && pswd.charAt(policyIdx2 - 1) == policyChar);
         }
     }
 
