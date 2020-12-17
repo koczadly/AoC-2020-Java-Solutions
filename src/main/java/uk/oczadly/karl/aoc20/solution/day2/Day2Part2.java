@@ -17,7 +17,7 @@ public class Day2Part2 extends PuzzleSolution {
     @Override
     public Object solve(PuzzleInput input) {
         return input.asStream()
-                .map(PasswordEntry::parse)
+                .map(PasswordEntry::new)
                 .filter(PasswordEntry::isValid)
                 .count();
     }
@@ -26,29 +26,24 @@ public class Day2Part2 extends PuzzleSolution {
     static class PasswordEntry {
         static final Pattern INPUT_MATCHER = Pattern.compile("^(\\d+)-(\\d+) (\\w): (\\w+)$"); // 8-9 x: xxxxxxxrk
     
-        final String pass;
+        final String pswd;
         char policyChar;
         int policyIdx1, policyIdx2;
-        
-        public PasswordEntry(String pass, char policyChar, int policyIdx1, int policyIdx2) {
-            this.pass = pass;
-            this.policyChar = policyChar;
-            this.policyIdx1 = policyIdx1;
-            this.policyIdx2 = policyIdx2;
+    
+        /** Parses a password entry from the raw input data. */
+        public PasswordEntry(String str) {
+            Matcher matcher = INPUT_MATCHER.matcher(str);
+            if (!matcher.matches()) throw new IllegalInputException("Invalid input");
+            this.pswd = matcher.group(4);
+            this.policyChar = matcher.group(3).charAt(0);
+            this.policyIdx1 = Integer.parseInt(matcher.group(1));
+            this.policyIdx2 = Integer.parseInt(matcher.group(2));
         }
     
         /** Returns true if the password meets the criteria set by the password policy. */
         public boolean isValid() {
-            return (pass.length() >= policyIdx1 && pass.charAt(policyIdx1 - 1) == policyChar)
-                    ^ (pass.length() >= policyIdx2 && pass.charAt(policyIdx2 - 1) == policyChar);
-        }
-    
-        /** Parses a password entry from the raw input data. */
-        public static PasswordEntry parse(String s) {
-            Matcher matcher = INPUT_MATCHER.matcher(s);
-            if (!matcher.matches()) throw new IllegalInputException("Invalid input");
-            return new PasswordEntry(matcher.group(4), matcher.group(3).charAt(0),
-                    Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
+            return (pswd.length() >= policyIdx1 && pswd.charAt(policyIdx1 - 1) == policyChar)
+                    ^ (pswd.length() >= policyIdx2 && pswd.charAt(policyIdx2 - 1) == policyChar);
         }
     }
 
