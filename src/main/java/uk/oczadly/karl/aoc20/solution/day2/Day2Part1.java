@@ -3,6 +3,7 @@ package uk.oczadly.karl.aoc20.solution.day2;
 import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.PuzzleSolution;
+import uk.oczadly.karl.aoc20.util.InputUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,51 +24,32 @@ public class Day2Part1 extends PuzzleSolution {
     }
     
     
-    static class PasswordPolicy {
-        char c;
-        int min, max;
-    
-        public PasswordPolicy(char c, int min, int max) {
-            this.c = c;
-            this.min = min;
-            this.max = max;
-        }
-    
-        /** Returns true if the given password meets the criteria set by this password policy. */
-        public boolean matches(String s) {
-            int count = (int)s.chars()
-                    .filter(c -> c == this.c)
-                    .count();
-            return count >= min && count <= max;
-        }
-    }
-    
-    // 8-9 x: xxxxxxxrk
-    static final Pattern INPUT_MATCHER = Pattern.compile("^(\\d+)-(\\d+) (\\w): (\\w+)$");
-    
     static class PasswordEntry {
-        String password;
-        PasswordPolicy policy;
+        static final Pattern INPUT_MATCHER = Pattern.compile("^(\\d+)-(\\d+) (\\w): (\\w+)$"); // 8-9 x: xxxxxxxrk
         
-        public PasswordEntry(String password, PasswordPolicy policy) {
+        final String password;
+        char policyChar;
+        int policyMin, policyMax;
+        
+        public PasswordEntry(String password, char policyChar, int policyMin, int policyMax) {
             this.password = password;
-            this.policy = policy;
+            this.policyChar = policyChar;
+            this.policyMin = policyMin;
+            this.policyMax = policyMax;
         }
         
         /** Returns true if the password meets the criteria set by the password policy. */
         public boolean isValid() {
-            return policy.matches(password);
+            int count = (int)password.chars().filter(c -> c == this.policyChar).count();
+            return count >= policyMin && count <= policyMax;
         }
         
         /** Parses a password entry from the raw input data. */
         public static PasswordEntry parse(String s) {
             Matcher matcher = INPUT_MATCHER.matcher(s);
             if (!matcher.matches()) throw new IllegalInputException("Invalid input");
-            
-            return new PasswordEntry(matcher.group(4),
-                    new PasswordPolicy(matcher.group(3).charAt(0),
-                            Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)))
-            );
+            return new PasswordEntry(matcher.group(4), matcher.group(3).charAt(0),
+                            Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
         }
     }
 

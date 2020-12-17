@@ -23,49 +23,32 @@ public class Day2Part2 extends PuzzleSolution {
     }
     
     
-    static class PasswordPolicy {
-        char c;
-        int index1, index2;
-    
-        public PasswordPolicy(char c, int index1, int index2) {
-            this.c = c;
-            this.index1 = index1;
-            this.index2 = index2;
-        }
-    
-        /** Returns true if the given password meets the criteria set by this password policy. */
-        public boolean matches(String s) {
-            return (s.length() >= index1 && s.charAt(index1 - 1) == c)
-                    ^ (s.length() >= index2 && s.charAt(index2 - 1) == c);
-        }
-    }
-    
-    // 8-9 x: xxxxxxxrk
-    static final Pattern INPUT_MATCHER = Pattern.compile("^(\\d+)-(\\d+) (\\w): (\\w+)$");
-    
     static class PasswordEntry {
-        String password;
-        PasswordPolicy policy;
+        static final Pattern INPUT_MATCHER = Pattern.compile("^(\\d+)-(\\d+) (\\w): (\\w+)$"); // 8-9 x: xxxxxxxrk
+    
+        final String pass;
+        char policyChar;
+        int policyIdx1, policyIdx2;
         
-        public PasswordEntry(String password, PasswordPolicy policy) {
-            this.password = password;
-            this.policy = policy;
+        public PasswordEntry(String pass, char policyChar, int policyIdx1, int policyIdx2) {
+            this.pass = pass;
+            this.policyChar = policyChar;
+            this.policyIdx1 = policyIdx1;
+            this.policyIdx2 = policyIdx2;
         }
     
         /** Returns true if the password meets the criteria set by the password policy. */
         public boolean isValid() {
-            return policy.matches(password);
+            return (pass.length() >= policyIdx1 && pass.charAt(policyIdx1 - 1) == policyChar)
+                    ^ (pass.length() >= policyIdx2 && pass.charAt(policyIdx2 - 1) == policyChar);
         }
     
         /** Parses a password entry from the raw input data. */
         public static PasswordEntry parse(String s) {
             Matcher matcher = INPUT_MATCHER.matcher(s);
             if (!matcher.matches()) throw new IllegalInputException("Invalid input");
-            
-            return new PasswordEntry(matcher.group(4),
-                    new PasswordPolicy(matcher.group(3).charAt(0),
-                            Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)))
-            );
+            return new PasswordEntry(matcher.group(4), matcher.group(3).charAt(0),
+                    Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
         }
     }
 
