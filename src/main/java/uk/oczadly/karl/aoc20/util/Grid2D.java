@@ -18,9 +18,7 @@ public class Grid2D<T> {
     }
     
     public Grid2D(int width, int height, T initialVal) {
-        this.width = width;
-        this.height = height;
-        this.table = new Object[height][width];
+        this(new Object[height][width], width, height);
         // Fill the array
         if (initialVal != null) {
             for (int y = 0; y < height; y++) {
