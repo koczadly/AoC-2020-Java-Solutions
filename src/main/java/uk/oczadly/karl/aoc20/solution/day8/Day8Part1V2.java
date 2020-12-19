@@ -9,9 +9,9 @@ import java.util.List;
 /**
  * Simplified version of Day8Part1
  */
-public class Day8Part1Simple extends PuzzleSolution {
+public class Day8Part1V2 extends PuzzleSolution {
     
-    public Day8Part1Simple() { super(8, 1, 2); } // Initializes the day and part number
+    public Day8Part1V2() { super(8, 1, 2); } // Initializes the day and part number
     
     @Override
     public Object solve(PuzzleInput input) {
