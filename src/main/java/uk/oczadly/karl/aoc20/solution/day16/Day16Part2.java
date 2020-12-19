@@ -4,6 +4,7 @@ import uk.oczadly.karl.aoc20.PuzzleSolution;
 import uk.oczadly.karl.aoc20.input.IllegalInputException;
 import uk.oczadly.karl.aoc20.input.PuzzleInput;
 import uk.oczadly.karl.aoc20.util.InputUtil;
+import uk.oczadly.karl.aoc20.util.Util;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -68,7 +69,7 @@ public class Day16Part2 extends PuzzleSolution {
                 Set<FieldRule> fields = allMatchingFields.get(fi);
                 if (fields.size() == 1) {
                     // Found single match for field index
-                    FieldRule rule = fields.iterator().next(); // Get only item from set
+                    FieldRule rule = Util.getOnlyElement(fields);
                     result[fi] = rule;
                     updated = true;
                     // Remove field from other matching indexes (as it belongs to this index)
